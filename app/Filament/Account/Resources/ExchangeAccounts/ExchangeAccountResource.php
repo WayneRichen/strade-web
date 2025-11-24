@@ -19,7 +19,7 @@ class ExchangeAccountResource extends Resource
 {
     protected static ?string $model = ExchangeAccount::class;
 
-    protected static string|BackedEnum|null $navigationIcon = Heroicon::OutlinedRectangleStack;
+    protected static string|BackedEnum|null $navigationIcon = Heroicon::BuildingLibrary;
 
     protected static ?string $recordTitleAttribute = 'ExchangeAccount';
 

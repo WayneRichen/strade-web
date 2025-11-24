@@ -81,7 +81,7 @@ return new class extends Migration {
             $table->integer('user_id')->unsignedBigInteger()->comment('對應 users.id');
             $table->integer('exchange_account_id')->unsignedInteger()->comment('對應 exchange_accounts.id');
             $table->integer('strategy_id')->unsignedInteger()->comment('對應 strategies.id');
-            $table->integer('exchange_symbol_id')->unsignedInteger()->comment('對應 exchange_symbols.id');
+            $table->string('exchange_symbol', 50)->comment('交易所的交易對名稱');
             $table->string('name', 100)->comment('使用者自訂 bot 顯示名稱');
             $table->unsignedInteger('leverage')->default(1)->comment('槓桿倍數');
             $table->decimal('base_order_usdt', 30, 10)->nullable();
