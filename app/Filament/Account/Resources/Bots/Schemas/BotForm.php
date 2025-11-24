@@ -2,6 +2,7 @@
 
 namespace App\Filament\Account\Resources\Bots\Schemas;
 
+use App\Models\Bot;
 use App\Models\Strategy;
 use App\Models\ExchangeAccount;
 use App\Models\ExchangeSymbol;
@@ -15,6 +16,7 @@ use Filament\Schemas\Components\Wizard;
 use Filament\Schemas\Components\Utilities\Get;
 use Filament\Schemas\Components\Wizard\Step;
 use Filament\Schemas\Components\Utilities\Set;
+use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\Auth;
 
 class BotForm
@@ -30,9 +32,38 @@ class BotForm
                         ->schema([
                             Select::make('exchange_account_id')
                                 ->label('交易所帳戶')
-                                ->options(fn() => ExchangeAccount::query()
-                                    ->where('user_id', Auth::id())
-                                    ->pluck('name', 'id'))
+                                ->options(function (?Model $record) {
+                                    $accounts = ExchangeAccount::query()
+                                        ->where('user_id', Auth::id())
+                                        ->get();
+
+                                    // 找出已經被某個 Bot 綁定過的帳戶 id
+                                    $usedAccountIds = Bot::query()
+                                        ->whereIn('exchange_account_id', $accounts->pluck('id'))
+                                        ->pluck('exchange_account_id')
+                                        ->all();
+
+                                    return $accounts->mapWithKeys(function ($account) use ($usedAccountIds, $record) {
+                                        $label = $account->name;
+
+                                        // 👉 只有在「新增」的時候才標註（已綁定其他 Bot）
+                                        if (is_null($record) && in_array($account->id, $usedAccountIds)) {
+                                            $label .= '（已綁定其他 Bot）';
+                                        }
+
+                                        return [$account->id => $label];
+                                    });
+                                })
+                                ->disableOptionWhen(function (string $value, ?Model $record): bool {
+                                    /** @var Bot|null $record */
+                                    // 如果是現在這筆 Bot 用的帳戶，就不要 disable
+                                    if ($record && (int) $record->exchange_account_id === (int) $value) {
+                                        return false;
+                                    }
+
+                                    // 其他 Bot 有用到這個帳戶，就 disable
+                                    return Bot::where('exchange_account_id', $value)->exists();
+                                })
                                 ->required()
                                 ->searchable()
                                 ->live()
@@ -215,8 +246,8 @@ class BotForm
         $exchangeAccountId = $get('exchange_account_id');
         $strategyId = $get('strategy_id');
 
-        if (! $exchangeAccountId || ! $strategyId) {
-            $set('symbol', null);
+        if (!$exchangeAccountId || !$strategyId) {
+            $set('exchange_symbol', null);
             return;
         }
 
@@ -224,7 +255,7 @@ class BotForm
         $strategy = Strategy::find($strategyId);
 
         if (!$account || !$strategy) {
-            $set('symbol', null);
+            $set('exchange_symbol', null);
             return;
         }
 

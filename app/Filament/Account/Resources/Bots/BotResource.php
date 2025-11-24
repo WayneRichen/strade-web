@@ -19,7 +19,7 @@ class BotResource extends Resource
 {
     protected static ?string $model = Bot::class;
 
-    protected static string|BackedEnum|null $navigationIcon = Heroicon::CpuChip;
+    protected static string|BackedEnum|null $navigationIcon = Heroicon::CommandLine;
 
     protected static ?string $recordTitleAttribute = 'Bot';
 
