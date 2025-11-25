@@ -77,13 +77,13 @@ class BotForm
                                 ->label('帳戶狀態')
                                 ->content(function (Get $get) {
                                     $id = $get('exchange_account_id');
-                                    if (! $id) {
+                                    if (!$id) {
                                         return '請先選擇帳戶';
                                     }
 
                                     $account = ExchangeAccount::find($id);
 
-                                    if (! $account) {
+                                    if (!$account) {
                                         return '帳戶不存在，請重新選擇';
                                     }
 
@@ -113,7 +113,7 @@ class BotForm
                                 ->required()
                                 ->searchable()
                                 ->afterStateUpdated(function (Get $get, Set $set, $state) {
-                                    if (! $state) {
+                                    if (!$state) {
                                         // 如果清空策略選擇，就把 name 也清掉
                                         $set('name', null);
                                         return;
@@ -121,7 +121,7 @@ class BotForm
 
                                     $strategy = Strategy::find($state);
 
-                                    if (! $strategy) {
+                                    if (!$strategy) {
                                         $set('name', null);
                                         return;
                                     }
@@ -137,13 +137,13 @@ class BotForm
                                 ->label('策略說明')
                                 ->content(function (Get $get) {
                                     $id = $get('strategy_id');
-                                    if (! $id) {
+                                    if (!$id) {
                                         return '請先選擇策略';
                                     }
 
                                     $strategy = Strategy::find($id);
 
-                                    if (! $strategy) {
+                                    if (!$strategy) {
                                         return '策略不存在，請重新選擇';
                                     }
 
@@ -191,12 +191,12 @@ class BotForm
                                         ->label('交易所帳戶')
                                         ->content(function (Get $get) {
                                             $id = $get('exchange_account_id');
-                                            if (! $id) {
+                                            if (!$id) {
                                                 return '-';
                                             }
 
                                             $account = ExchangeAccount::find($id);
-                                            if (! $account) {
+                                            if (!$account) {
                                                 return '-';
                                             }
 
@@ -207,12 +207,12 @@ class BotForm
                                         ->label('策略')
                                         ->content(function (Get $get) {
                                             $id = $get('strategy_id');
-                                            if (! $id) {
+                                            if (!$id) {
                                                 return '-';
                                             }
 
                                             $strategy = Strategy::find($id);
-                                            if (! $strategy) {
+                                            if (!$strategy) {
                                                 return '-';
                                             }
 
@@ -251,7 +251,7 @@ class BotForm
             return;
         }
 
-        $account  = ExchangeAccount::find($exchangeAccountId);
+        $account = ExchangeAccount::find($exchangeAccountId);
         $strategy = Strategy::find($strategyId);
 
         if (!$account || !$strategy) {

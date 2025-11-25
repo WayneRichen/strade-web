@@ -4,7 +4,6 @@ namespace App\Filament\Account\Resources\Bots\Pages;
 
 use App\Filament\Account\Resources\Bots\BotResource;
 use Filament\Actions\DeleteAction;
-use Filament\Actions\ViewAction;
 use Filament\Resources\Pages\EditRecord;
 
 class EditBot extends EditRecord
