@@ -32,8 +32,8 @@ return new class extends Migration {
         Schema::create('exchange_symbols', function (Blueprint $table) {
             $table->id();
             $table->string('unified_symbol', 50)->comment('我們平台用的統一名稱');
-            $table->integer('exchange_id')->unsignedInteger()->comment('對應 exchanges.id');
-            $table->string('exchange_symbol', 50)->comment('我們平台用的統一名稱');
+            $table->unsignedInteger('exchange_id')->comment('對應 exchanges.id');
+            $table->string('exchange_symbol', 50)->comment('交易所實際 symbol 名稱');
         });
 
         DB::table('exchange_symbols')->insert([
@@ -48,7 +48,9 @@ return new class extends Migration {
             $table->id();
             $table->string('name', 100)->comment('顯示給使用者看的策略名稱');
             $table->string('unified_symbol', 50)->comment('我們平台的交易對名稱');
-            $table->text('description')->nullable()->comment('描述');
+            $table->enum('direction', ['LONG', 'SHORT'])->comment('策略方向');
+            $table->string('description', 255)->nullable()->comment('描述');
+            $table->text('html')->nullable()->comment('HTML 介紹');
             $table->string('class_name', 100)->comment('Python 策略程式名稱，例如：BTCUSDTBreakout');
             $table->boolean('is_active')->default(true)->comment('是否啟用');
             $table->timestamps();
@@ -58,6 +60,7 @@ return new class extends Migration {
             [
                 'name' => '自適應趨勢突破模型',
                 'unified_symbol' => 'BTCUSDT',
+                'direction' => 'LONG',
                 'description' => '把握趨勢、衝刺動能，只在有方向、有肉可以吃的行情出手。',
                 'class_name' => 'btcusdt_breakout',
                 'created_at' => now(),
@@ -67,20 +70,21 @@ return new class extends Migration {
 
         Schema::create('exchange_accounts', function (Blueprint $table) {
             $table->id();
-            $table->integer('user_id')->unsignedBigInteger()->comment('對應 users.id');
-            $table->integer('exchange_id')->unsignedInteger()->comment('對應 exchanges.id');
+            $table->unsignedBigInteger('user_id')->comment('對應 users.id');
+            $table->unsignedInteger('exchange_id')->comment('對應 exchanges.id');
             $table->string('name', 100)->nullable()->comment('使用者自訂名稱');
             $table->json('params')->comment('使用者的交易所的 API Key');
             $table->dateTime('last_connected_at')->nullable();
             $table->string('last_status', 50)->nullable(); // OK / INVALID_KEY 等文字
             $table->timestamps();
+            $table->index('user_id');
         });
 
         Schema::create('bots', function (Blueprint $table) {
             $table->id();
-            $table->integer('user_id')->unsignedBigInteger()->comment('對應 users.id');
-            $table->integer('exchange_account_id')->unsignedInteger()->comment('對應 exchange_accounts.id');
-            $table->integer('strategy_id')->unsignedInteger()->comment('對應 strategies.id');
+            $table->unsignedBigInteger('user_id')->comment('對應 users.id');
+            $table->unsignedInteger('exchange_account_id')->comment('對應 exchange_accounts.id');
+            $table->unsignedInteger('strategy_id')->comment('對應 strategies.id');
             $table->string('exchange_symbol', 50)->comment('交易所的交易對名稱');
             $table->string('name', 100)->comment('使用者自訂 bot 顯示名稱');
             $table->unsignedInteger('leverage')->default(1)->comment('槓桿倍數');
@@ -92,6 +96,7 @@ return new class extends Migration {
             $table->timestamps();
             // 核心限制：同一個 exchange_account 只能被一個 bot 使用
             $table->unique('exchange_account_id');
+            $table->index('user_id');
         });
     }
 

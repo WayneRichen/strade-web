@@ -9,28 +9,21 @@ return new class extends Migration {
     {
         Schema::create('activity_logs', function (Blueprint $table) {
             $table->id();
-
-            // 操作者
-            $table->foreignId('user_id')->nullable();
+            $table->foreignId('user_id')->nullable()->comment('操作者');
 
             // 被操作的 Model
             $table->morphs('loggable'); // loggable_type, loggable_id
 
-            // 動作類型：created / updated / deleted ...
-            $table->string('action', 50);
-
-            // 簡單描述（選填）
-            $table->string('description')->nullable();
-
-            // 詳細變更紀錄：old / new / dirty 等
-            $table->json('properties')->nullable();
-
-            // Request 資訊（非必要，但很好用）
+            $table->string('action', 50)->comment('動作類型：created / updated / deleted');
+            $table->string('description')->nullable()->comment('簡單描述（選填）');
+            $table->json('properties')->nullable()->comment('詳細變更紀錄：old / new / dirty 等');
             $table->string('ip_address', 45)->nullable();
             $table->text('user_agent')->nullable();
             $table->string('url')->nullable();
 
             $table->timestamps();
+
+            $table->index('user_id');
         });
     }
 

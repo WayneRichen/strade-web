@@ -2,10 +2,13 @@
 
 namespace App\Models;
 
+use App\Models\Concerns\LogsActivity;
 use Illuminate\Database\Eloquent\Model;
 
 class Bot extends Model
 {
+    use LogsActivity;
+
     protected $fillable = [
         'user_id',
         'exchange_account_id',
