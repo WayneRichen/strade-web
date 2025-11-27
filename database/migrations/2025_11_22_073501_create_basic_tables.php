@@ -97,6 +97,7 @@ return new class extends Migration {
             // 核心限制：同一個 exchange_account 只能被一個 bot 使用
             $table->unique('exchange_account_id');
             $table->index('user_id');
+            $table->index(['strategy_id', 'status']);
         });
     }
 

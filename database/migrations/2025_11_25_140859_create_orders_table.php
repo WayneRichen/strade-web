@@ -60,6 +60,7 @@ return new class extends Migration {
 
             $table->index(['user_id', 'status']);
             $table->index(['strategy_trade_id', 'status']);
+            $table->index(['bot_id', 'status']);
         });
 
         Schema::create('user_trade_orders', function (Blueprint $table) {
@@ -72,19 +73,14 @@ return new class extends Migration {
             $table->decimal('requested_qty', 30, 10);
             $table->decimal('filled_qty', 30, 10)->default(0);
 
-            $table->enum('status', [
-                'NEW',
-                'PARTIALLY_FILLED',
-                'FILLED',
-                'CANCELED',
-                'REJECTED'
-            ])->default('NEW');
+            $table->string('status', 50)->default('NEW');
 
             $table->text('raw_response')->nullable();
 
             $table->timestamps();
 
             $table->index(['user_trade_id', 'status']);
+            $table->unique(['user_trade_id', 'exchange_order_id']);
         });
     }
 
