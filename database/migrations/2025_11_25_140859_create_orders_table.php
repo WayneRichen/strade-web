@@ -48,8 +48,7 @@ return new class extends Migration {
             $table->timestamp('opened_at')->nullable()->comment('開倉時間');
             $table->timestamp('closed_at')->nullable()->comment('平倉時間');
 
-            $table->enum('status', ['PENDING', 'OPEN', 'CLOSING', 'CLOSED', 'FAILED'])
-                ->default('PENDING')->comment('狀態');
+            $table->string('status', 50)->default('PENDING')->comment('狀態');
 
             $table->decimal('pnl', 30, 10)->nullable()->comment('損益');
             $table->decimal('pnl_pct', 9, 4)->nullable()->comment('損益（%）');
@@ -68,14 +67,14 @@ return new class extends Migration {
             $table->unsignedBigInteger('user_trade_id')->comment('使用者跟單 id');
             $table->string('exchange_order_id', 100)->nullable()->comment('交易所訂單編號');
 
-            $table->enum('type', ['OPEN', 'CLOSE']);
+            $table->enum('type', ['OPEN', 'CLOSE'])->comment('開單/關單');
             $table->decimal('price', 30, 10)->nullable()->comment('委託價格 (限價單)');
-            $table->decimal('requested_qty', 30, 10);
-            $table->decimal('filled_qty', 30, 10)->default(0);
+            $table->decimal('requested_qty', 30, 10)->comment('委託數量');
+            $table->decimal('filled_qty', 30, 10)->default(0)->comment('成交數量');
 
-            $table->string('status', 50)->default('NEW');
+            $table->string('status', 50)->default('NEW')->comment('狀態');
 
-            $table->text('raw_response')->nullable();
+            $table->text('raw_response')->nullable()->comment('交易所回覆');
 
             $table->timestamps();
 
