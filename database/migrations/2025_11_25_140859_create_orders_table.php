@@ -21,7 +21,7 @@ return new class extends Migration {
             $table->timestamp('entry_at')->nullable()->comment('開單時間');
             $table->timestamp('exit_at')->nullable()->comment('平倉時間');
 
-            $table->enum('status', ['OPEN', 'CLOSED'])->default('OPEN')->comment('訂單狀態');
+            $table->enum('status', ['OPEN', 'CLOSED', 'TP_CLOSED', 'SL_CLOSED'])->default('OPEN')->comment('訂單狀態');
             $table->decimal('pnl_pct', 9, 4)->nullable()->comment('損益');
             $table->json('extra')->nullable()->comment('備註');
 
