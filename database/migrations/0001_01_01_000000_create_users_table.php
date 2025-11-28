@@ -19,6 +19,16 @@ return new class extends Migration
             $table->string('email')->unique();
             $table->boolean('is_admin')->nullable();
             $table->rememberToken();
+
+            $table->string('invite_code')->unique()->comment('邀請碼');
+            $table->unsignedBigInteger('invited_by')->nullable()->comment('被誰邀請 user.id');
+            $table->integer('invite_count')->default(0)->comment('邀請人數');
+
+            $table->string('subscription_plan')->default('free')->comment('方案');
+            $table->timestamp('subscription_ends_at')->nullable()->comment('會員到期日');
+
+            $table->timestamp('last_login_at')->nullable()->comment('最後登入時間');
+
             $table->timestamps();
         });
     }
