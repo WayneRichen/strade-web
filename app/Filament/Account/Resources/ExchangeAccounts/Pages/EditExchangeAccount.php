@@ -51,29 +51,10 @@ class EditExchangeAccount extends EditRecord
         try {
             $exchange = new $exchangeClass(...$params);
 
-            $assets = $exchange->getBalance();
-
-            if (empty($assets)) {
-                Notification::make()
-                    ->title('API Key 測試結果')
-                    ->body('連線成功，但帳戶沒有資產或查不到餘額。')
-                    ->warning()
-                    ->send();
-
-                return;
-            }
-
-            // 簡單組一個顯示文字
-            $summary = collect($assets)
-                ->take(5) // 不要一次秀太多
-                ->map(function ($asset) {
-                    return $asset['coin'] . ': ' . $asset['available'];
-                })
-                ->implode("\n");
+            $exchange->check();
 
             Notification::make()
                 ->title('API Key 測試成功')
-                ->body("成功取得餘額，前幾筆如下：\n" . $summary)
                 ->success()
                 ->send();
 

@@ -31,41 +31,19 @@ class Bitget
     }
 
     /**
-     * 查看餘額
+     * 測試連線
      *
-     * - 不帶參數：回傳全部非 0 資產陣列（Bitget `assets` 整包）
-     * - 帶 coin：回傳單一幣別的資訊（找不到就回傳空陣列）
-     *
-     * @param string|null $coin 例如 'USDT', 'BTC'
-     * @return array
+     * @return bool
      */
-    public function getBalance(?string $coin = null): array
+    public function check(): bool
     {
-        // 這裡用的是 Unified Trading Account 的 Get Account Assets
-        // GET /api/v3/account/assets :contentReference[oaicite:2]{index=2}
-        $response = $this->request('GET', '/api/v3/account/assets');
+        $response = $this->request('GET', '/api/v2/spot/account/info');
 
         if (($response['code'] ?? null) !== '00000') {
             throw new \RuntimeException('Bitget API error: ' . ($response['msg'] ?? 'unknown'));
         }
 
-        $assets = $response['data']['assets'] ?? [];
-
-        if ($coin === null) {
-            // 直接回傳所有資產
-            return $assets;
-        }
-
-        $coin = strtoupper($coin);
-
-        foreach ($assets as $asset) {
-            if (($asset['coin'] ?? null) === $coin) {
-                return $asset;
-            }
-        }
-
-        // 找不到指定幣別就回空陣列
-        return [];
+        return true;
     }
 
     /**
