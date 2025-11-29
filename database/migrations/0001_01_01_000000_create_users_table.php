@@ -20,7 +20,6 @@ return new class extends Migration
             $table->boolean('is_admin')->nullable();
             $table->rememberToken();
 
-            $table->string('invite_code')->unique()->comment('邀請碼');
             $table->unsignedBigInteger('invited_by')->nullable()->comment('被誰邀請 user.id');
             $table->integer('invite_count')->default(0)->comment('邀請人數');
 
@@ -30,6 +29,8 @@ return new class extends Migration
             $table->timestamp('last_login_at')->nullable()->comment('最後登入時間');
 
             $table->timestamps();
+
+            $table->index(['invited_by', 'created_at']);
         });
     }
 
