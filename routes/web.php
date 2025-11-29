@@ -13,8 +13,3 @@ Route::get('/auth/google/redirect', [GoogleController::class, 'redirect'])
 Route::get('/auth/google/callback', [GoogleController::class, 'callback'])
     ->name('google.callback');
 
-Route::get('/invite/{code}', function (string $code) {
-    session(['invite_code' => $code]);
-
-    return redirect()->route('google.redirect');
-})->name('invite.link');
