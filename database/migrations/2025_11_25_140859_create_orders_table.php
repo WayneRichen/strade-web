@@ -28,6 +28,7 @@ return new class extends Migration {
             $table->timestamps();
 
             $table->index(['strategy_id', 'status', 'created_at']);
+            $table->index(['strategy_id', 'status', 'exit_at']);
         });
 
         Schema::create('user_trades', function (Blueprint $table) {
