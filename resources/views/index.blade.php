@@ -399,10 +399,6 @@
 
                     <div class="grid md:grid-cols-4 gap-6 mb-8">
                         <div class="glass-card p-6 rounded-xl">
-                            <div class="text-gray-400 text-sm mb-2">總報酬率</div>
-                            <div class="text-4xl font-bold" id="totalReturn">-%</div>
-                        </div>
-                        <div class="glass-card p-6 rounded-xl">
                             <div class="text-gray-400 text-sm mb-2">交易次數</div>
                             <div class="text-4xl font-bold" id="tradeCount">0</div>
                         </div>
@@ -414,6 +410,10 @@
                             <div class="text-gray-400 text-sm mb-2">最大回撤幅度</div>
                             <div class="text-4xl font-bold" id="maxDrawdown">-%</div>
                         </div>
+                        <div class="glass-card p-6 rounded-xl">
+                            <div class="text-gray-400 text-sm mb-2">總報酬率</div>
+                            <div class="text-4xl font-bold" id="totalReturn">-%</div>
+                        </div>
                     </div>
 
                     <div class="grid md:grid-cols-2 gap-6 mb-6">
@@ -423,7 +423,7 @@
                         </div>
                         <div class="glass-card p-6 rounded-xl">
                             <div class="text-gray-400 text-sm mb-2">最終資金</div>
-                            <div class="text-3xl font-bold" id="finalCapital">0</div>
+                            <div class="text-3xl font-bold neon-green" id="finalCapital">0</div>
                         </div>
                     </div>
 
@@ -700,9 +700,9 @@
 
             document.getElementById('tradeCount').textContent = filteredTrades.length;
             document.getElementById('winRate').textContent = winRate.toFixed(2) + '%';
-            document.getElementById('initialCapital').textContent =
+            document.getElementById('initialCapital').textContent = '$' +
                 initialAmount.toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
-            document.getElementById('finalCapital').textContent =
+            document.getElementById('finalCapital').textContent = '$' +
                 finalCapital.toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
             document.getElementById('maxDrawdown').textContent = maxDrawdown.toFixed(2) + '%';
 
