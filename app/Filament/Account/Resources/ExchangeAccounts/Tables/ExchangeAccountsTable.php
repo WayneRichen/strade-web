@@ -47,6 +47,6 @@ class ExchangeAccountsTable
             ])
             ->emptyStateIcon(Heroicon::BuildingLibrary)
             ->emptyStateHeading('還沒有連結交易所')
-            ->emptyStateDescription('點擊右上角「連結交易所」');
+            ->emptyStateDescription('點右上角的「連結交易所」就能開始設定');
     }
 }

@@ -31,12 +31,12 @@ class UserTradeResource extends Resource
 
     public static function getModelLabel(): string
     {
-        return '下單紀錄';
+        return '訂單紀錄';
     }
 
     public static function getPluralModelLabel(): string
     {
-        return '下單紀錄';
+        return '訂單紀錄';
     }
 
     public static function infolist(Schema $schema): Schema

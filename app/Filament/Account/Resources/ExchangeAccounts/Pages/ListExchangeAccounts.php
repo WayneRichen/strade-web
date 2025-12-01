@@ -15,7 +15,7 @@ class ListExchangeAccounts extends ListRecords
     protected function getHeaderActions(): array
     {
         return [
-            CreateAction::make(),
+            CreateAction::make()->label('連結交易所'),
         ];
     }
 }

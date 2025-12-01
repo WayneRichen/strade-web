@@ -107,6 +107,9 @@ class UserTradesTable
                             ->success()
                             ->send();
                     }),
-            ]);
+            ])
+            ->emptyStateIcon(Heroicon::ClipboardDocumentList)
+            ->emptyStateHeading('目前沒有訂單紀錄')
+            ->emptyStateDescription('設定好交易機器人後，等訊號出現就會自動產生訂單囉！');
     }
 }

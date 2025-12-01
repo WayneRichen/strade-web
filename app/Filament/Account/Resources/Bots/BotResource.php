@@ -31,6 +31,16 @@ class BotResource extends Resource
             ->where('user_id', auth()->id());  // 只抓自己的資料
     }
 
+    public static function getModelLabel(): string
+    {
+        return '交易機器人';
+    }
+
+    public static function getPluralModelLabel(): string
+    {
+        return '交易機器人';
+    }
+
     public static function form(Schema $schema): Schema
     {
         return BotForm::configure($schema)->columns(1);

@@ -31,6 +31,16 @@ class ExchangeAccountResource extends Resource
             ->where('user_id', auth()->id());  // 只抓自己的資料
     }
 
+    public static function getModelLabel(): string
+    {
+        return '交易所帳戶';
+    }
+
+    public static function getPluralModelLabel(): string
+    {
+        return '交易所帳戶';
+    }
+
     public static function form(Schema $schema): Schema
     {
         return ExchangeAccountForm::configure($schema);
