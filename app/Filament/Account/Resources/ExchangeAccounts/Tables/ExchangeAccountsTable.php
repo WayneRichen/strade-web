@@ -5,6 +5,7 @@ namespace App\Filament\Account\Resources\ExchangeAccounts\Tables;
 use Filament\Actions\BulkActionGroup;
 use Filament\Actions\DeleteBulkAction;
 use Filament\Actions\EditAction;
+use Filament\Support\Icons\Heroicon;
 use Filament\Tables\Table;
 use Filament\Tables\Columns\TextColumn;
 
@@ -34,6 +35,9 @@ class ExchangeAccountsTable
                 BulkActionGroup::make([
                     DeleteBulkAction::make(),
                 ]),
-            ]);
+            ])
+            ->emptyStateIcon(Heroicon::BuildingLibrary)
+            ->emptyStateHeading('還沒有連結交易所')
+            ->emptyStateDescription('點擊右上角「連結交易所」');
     }
 }

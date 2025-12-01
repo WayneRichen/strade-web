@@ -58,7 +58,7 @@ return new class extends Migration {
 
         DB::table('strategies')->insert([
             [
-                'name' => '自適應趨勢突破模型',
+                'name' => 'BTC趨勢突破',
                 'unified_symbol' => 'BTCUSDT',
                 'direction' => 'LONG',
                 'description' => '把握趨勢、衝刺動能，只在有方向、有肉可以吃的行情出手。',
