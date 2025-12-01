@@ -2,13 +2,12 @@
 
 namespace App\Providers\Filament;
 
+use App\Filament\Account\Pages\Dashboard;
+use App\Filament\Account\Widgets\ActiveBots;
 use App\Http\Middleware\Authenticate;
-use Filament\Pages\Dashboard;
 use Filament\Panel;
 use Filament\PanelProvider;
 use Filament\Support\Colors\Color;
-use Filament\Widgets\AccountWidget;
-use Filament\Widgets\FilamentInfoWidget;
 
 class AccountPanelProvider extends PanelProvider
 {
@@ -27,8 +26,7 @@ class AccountPanelProvider extends PanelProvider
             ])
             ->discoverWidgets(in: app_path('Filament/Account/Widgets'), for: 'App\Filament\Account\Widgets')
             ->widgets([
-                AccountWidget::class,
-                FilamentInfoWidget::class,
+                ActiveBots::class,
             ])
             ->middleware([
                 'web'
