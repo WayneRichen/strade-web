@@ -12,6 +12,8 @@ class EditExchangeAccount extends EditRecord
 {
     protected static string $resource = ExchangeAccountResource::class;
 
+    protected static ?string $title = '編輯交易所帳戶';
+
     protected function getHeaderActions(): array
     {
         return [

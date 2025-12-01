@@ -23,6 +23,8 @@ class ExchangeAccountResource extends Resource
 
     protected static ?string $recordTitleAttribute = 'ExchangeAccount';
 
+    protected static ?string $navigationLabel = '交易所帳戶';
+
     public static function getEloquentQuery(): Builder
     {
         return parent::getEloquentQuery()

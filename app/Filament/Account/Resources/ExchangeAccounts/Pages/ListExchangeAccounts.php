@@ -10,6 +10,8 @@ class ListExchangeAccounts extends ListRecords
 {
     protected static string $resource = ExchangeAccountResource::class;
 
+    protected static ?string $title = '交易所帳戶';
+
     protected function getHeaderActions(): array
     {
         return [

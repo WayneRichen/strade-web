@@ -235,7 +235,7 @@ class BotForm
 
                             Placeholder::make('summary_tip')
                                 ->label('提示')
-                                ->content('確認以上設定無誤後，按下「建立 Bot」會建立機器人並交給背景 Job 啟動。'),
+                                ->content(fn(?Model $record) => !$record ? '確認以上設定無誤後，按下「建立 Bot」會建立機器人並交給背景 Job 啟動。' : '設定變更將於下一筆交易訊號後開始套用，現有持倉不受影響。'),
                         ]),
                 ])
             ]);

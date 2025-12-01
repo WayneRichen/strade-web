@@ -9,6 +9,8 @@ class CreateBot extends CreateRecord
 {
     protected static string $resource = BotResource::class;
 
+    protected static ?string $title = '新增交易機器人';
+
     protected function mutateFormDataBeforeCreate(array $data): array
     {
         $data['user_id'] = auth()->id();

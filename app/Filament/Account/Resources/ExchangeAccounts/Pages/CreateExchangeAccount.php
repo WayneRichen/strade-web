@@ -11,6 +11,8 @@ class CreateExchangeAccount extends CreateRecord
 {
     protected static string $resource = ExchangeAccountResource::class;
 
+    protected static ?string $title = '新增交易所帳戶';
+
     protected function mutateFormDataBeforeCreate(array $data): array
     {
         $data['user_id'] = auth()->id();

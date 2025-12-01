@@ -23,6 +23,8 @@ class BotResource extends Resource
 
     protected static ?string $recordTitleAttribute = 'Bot';
 
+    protected static ?string $navigationLabel = '交易機器人';
+
     public static function getEloquentQuery(): Builder
     {
         return parent::getEloquentQuery()

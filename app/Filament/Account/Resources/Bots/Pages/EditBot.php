@@ -10,6 +10,8 @@ class EditBot extends EditRecord
 {
     protected static string $resource = BotResource::class;
 
+    protected static ?string $title = '編輯交易機器人';
+
     protected function getHeaderActions(): array
     {
         return [

@@ -10,6 +10,8 @@ class ListBots extends ListRecords
 {
     protected static string $resource = BotResource::class;
 
+    protected static ?string $title = '交易機器人';
+
     protected function getHeaderActions(): array
     {
         return [

@@ -16,14 +16,23 @@ class ExchangeAccountsTable
         return $table
             ->columns([
                 TextColumn::make('exchange.name')
+                    ->label('交易所名稱')
+                    ->searchable()
                     ->sortable(),
                 TextColumn::make('name')
+                    ->label('自訂名稱')
                     ->searchable(),
                 TextColumn::make('last_connected_at')
-                    ->dateTime()
+                    ->label('最後連線時間')
                     ->sortable(),
                 TextColumn::make('last_status')
-                    ->searchable(),
+                    ->badge()
+                    ->label('連線狀態')
+                    ->colors([
+                        'success' => 'OK',
+                        'danger' => 'INVALID',
+                    ])
+                    ->formatStateUsing(fn($state) => $state === 'OK' ? '成功' : '失敗')
             ])
             ->filters([
                 //
