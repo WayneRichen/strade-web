@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Strade - 加密貨幣自動交易機器人</title>
+    <title>{{config('app.name')}} - 加密貨幣自動交易機器人</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
@@ -142,7 +142,7 @@
                             <path d="M12 2L2 7v10c0 5.55 3.84 10.74 9 12 5.16-1.26 9-6.45 9-12V7l-10-5z" />
                         </svg>
                     </div>
-                    <span class="text-xl font-bold">Strade</span>
+                    <span class="text-xl font-bold">{{config('app.name')}}</span>
                 </div>
                 <div class="hidden md:flex space-x-8">
                     <a href="#features" class="text-gray-400 hover:text-white transition">功能特色</a>
@@ -199,7 +199,7 @@
         <div class="max-w-7xl mx-auto">
             <div class="text-center mb-12">
                 <div class="text-sm neon-green font-semibold mb-2">專業量化交易策略，讓你更有效率地掌握加密貨幣市場</div>
-                <h2 class="text-4xl font-bold">為什麼選擇 Strade？</h2>
+                <h2 class="text-4xl font-bold">為什麼選擇 {{config('app.name')}}？</h2>
             </div>
 
             <div class="grid md:grid-cols-4 gap-8">
@@ -578,7 +578,7 @@
         </div>
         <div class="max-w-4xl mx-auto text-center relative z-10">
             <h2 class="text-5xl font-bold mb-6">準備好啟動你的自動化交易流程了嗎？</h2>
-            <p class="text-xl text-gray-400 mb-8">立即使用 Strade 自動化交易。</p>
+            <p class="text-xl text-gray-400 mb-8">立即使用 {{config('app.name')}} 自動化交易。</p>
             <a href="{{ route('filament.account.pages.dashboard') }}" class="bg-neon-green text-black px-10 py-4 rounded-lg font-bold text-lg hover-neon">
                 立即開始
             </a>
@@ -589,7 +589,7 @@
     <footer class="border-t border-gray-800 py-12 px-4">
         <div class="max-w-7xl mx-auto">
             <div class="pt-4 text-center text-sm text-gray-400">
-                <p>&copy; <?=date('Y', time())?> Strade Services Inc. All rights reserved.</p>
+                <p>&copy; <?=date('Y', time())?> {{config('app.name')}} Services Inc. All rights reserved.</p>
             </div>
     </footer>
 
