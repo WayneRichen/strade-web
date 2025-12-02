@@ -7,6 +7,7 @@ use App\Filament\Account\Resources\ExchangeAccounts\ExchangeAccountResource;
 use Filament\Actions\DeleteAction;
 use Filament\Notifications\Notification;
 use Filament\Resources\Pages\EditRecord;
+use Filament\Support\Icons\Heroicon;
 
 class EditExchangeAccount extends EditRecord
 {
@@ -17,9 +18,25 @@ class EditExchangeAccount extends EditRecord
     protected function getHeaderActions(): array
     {
         return [
-            DeleteAction::make()->label('解除連結'),
+            DeleteAction::make()
+                ->label('解除連結')
+                ->modalicon(Heroicon::LinkSlash)
+                ->modalHeading('確定要解除這個交易所帳戶的連結嗎？')
+                ->modalDescription('⚠️ 解除後將無法再透過此帳戶下單。若有尚未平倉的部位，請先至交易所自行處理。')
+                ->modalSubmitActionLabel('是的，解除連結')
+                ->modalCancelActionLabel('取消'),
         ];
     }
+
+    public function getBreadcrumbs(): array
+    {
+        return [
+            route('filament.account.resources.exchange-accounts.index') => '交易所帳戶',
+            $this->record->name ?? '帳戶', // 動態顯示帳號名稱
+            '編輯',
+        ];
+    }
+
     protected function getRedirectUrl(): string
     {
         return $this->getResource()::getUrl('index');

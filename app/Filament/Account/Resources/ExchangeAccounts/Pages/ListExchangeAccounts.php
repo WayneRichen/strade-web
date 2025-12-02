@@ -18,4 +18,9 @@ class ListExchangeAccounts extends ListRecords
             CreateAction::make()->label('連結交易所'),
         ];
     }
+
+    public function getBreadcrumbs(): array
+    {
+        return [];
+    }
 }

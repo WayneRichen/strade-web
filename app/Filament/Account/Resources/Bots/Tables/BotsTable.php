@@ -2,8 +2,6 @@
 
 namespace App\Filament\Account\Resources\Bots\Tables;
 
-use Filament\Actions\BulkActionGroup;
-use Filament\Actions\DeleteBulkAction;
 use Filament\Actions\EditAction;
 use Filament\Support\Icons\Heroicon;
 use Filament\Tables\Columns\TextColumn;
@@ -64,9 +62,6 @@ class BotsTable
                 EditAction::make(),
             ])
             ->toolbarActions([
-                BulkActionGroup::make([
-                    DeleteBulkAction::make(),
-                ]),
             ])
             ->emptyStateIcon(Heroicon::CommandLine)
             ->emptyStateHeading('還沒有交易機器人')

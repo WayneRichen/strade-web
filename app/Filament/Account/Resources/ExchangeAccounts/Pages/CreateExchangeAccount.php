@@ -11,7 +11,7 @@ class CreateExchangeAccount extends CreateRecord
 {
     protected static string $resource = ExchangeAccountResource::class;
 
-    protected static ?string $title = '新增交易所帳戶';
+    protected static ?string $title = '連結交易所帳戶';
 
     protected function mutateFormDataBeforeCreate(array $data): array
     {
@@ -23,6 +23,14 @@ class CreateExchangeAccount extends CreateRecord
     protected function getRedirectUrl(): string
     {
         return $this->getResource()::getUrl('index');
+    }
+
+    public function getBreadcrumbs(): array
+    {
+        return [
+            route('filament.account.resources.exchange-accounts.index') => '交易所帳戶',
+            '連結交易所',
+        ];
     }
 
     public function testApiKey()

@@ -23,4 +23,13 @@ class EditBot extends EditRecord
     {
         return $this->getResource()::getUrl('index');
     }
+
+    public function getBreadcrumbs(): array
+    {
+        return [
+            route('filament.account.resources.bots.index') => '交易機器人',
+            $this->record->name ?? '交易機器人',
+            '編輯',
+        ];
+    }
 }

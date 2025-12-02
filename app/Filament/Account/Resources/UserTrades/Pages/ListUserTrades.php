@@ -13,4 +13,9 @@ class ListUserTrades extends ListRecords
     {
         return [];
     }
+
+    public function getBreadcrumbs(): array
+    {
+        return [];
+    }
 }

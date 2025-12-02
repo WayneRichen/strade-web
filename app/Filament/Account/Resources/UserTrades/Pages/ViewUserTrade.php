@@ -15,4 +15,11 @@ class ViewUserTrade extends ViewRecord
     {
         return [];
     }
+
+    public function getBreadcrumbs(): array
+    {
+        return [
+            route('filament.account.resources.user-trades.index') => '訂單紀錄',
+        ];
+    }
 }

@@ -165,6 +165,7 @@ class BotForm
                                 ->label('投入金額 (USDT)')
                                 ->numeric()
                                 ->minValue(10)
+                                ->maxValue(500)
                                 ->default(100)
                                 ->required(),
 

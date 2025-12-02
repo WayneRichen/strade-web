@@ -18,4 +18,9 @@ class ListBots extends ListRecords
             CreateAction::make()->label('新增交易機器人'),
         ];
     }
+
+    public function getBreadcrumbs(): array
+    {
+        return [];
+    }
 }
