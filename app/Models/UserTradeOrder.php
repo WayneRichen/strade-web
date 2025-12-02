@@ -13,6 +13,7 @@ class UserTradeOrder extends Model
         'price',
         'requested_qty',
         'filled_qty',
+        'fee',
         'status',
         'raw_response',
     ];

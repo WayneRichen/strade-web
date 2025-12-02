@@ -72,6 +72,7 @@ return new class extends Migration {
             $table->decimal('price', 30, 10)->nullable()->comment('委託價格 (限價單)');
             $table->decimal('requested_qty', 30, 10)->comment('委託數量');
             $table->decimal('filled_qty', 30, 10)->default(0)->comment('成交數量');
+            $table->decimal('fee', 30, 10)->default(0)->comment('手續費');
 
             $table->string('status', 50)->default('NEW')->comment('狀態');
 

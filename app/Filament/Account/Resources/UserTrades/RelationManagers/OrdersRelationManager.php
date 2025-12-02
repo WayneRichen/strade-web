@@ -45,6 +45,10 @@ class OrdersRelationManager extends RelationManager
                     ->label('成交數量')
                     ->numeric(4),
 
+                TextColumn::make('fee')
+                    ->label('手續費')
+                    ->numeric(6),
+
                 TextColumn::make('status')
                     ->label('狀態')
                     ->badge()

@@ -76,6 +76,7 @@ return new class extends Migration {
             $table->json('params')->comment('使用者的交易所的 API Key');
             $table->dateTime('last_connected_at')->nullable();
             $table->string('last_status', 50)->nullable(); // OK / INVALID_KEY 等文字
+            $table->text('raw_response')->nullable();
             $table->timestamps();
             $table->index('user_id');
         });

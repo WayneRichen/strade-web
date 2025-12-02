@@ -52,14 +52,20 @@ class CreateExchangeAccount extends CreateRecord
         try {
             $exchange = new $exchangeClass(...$params);
 
-            $exchange->check();
+            $response = $exchange->check();
+
+            $this->data['last_connected_at'] = now();
+            $this->data['last_status'] = 'OK';
+            $this->data['raw_response'] = $response;
 
             Notification::make()
                 ->title('API Key 測試成功')
                 ->success()
                 ->send();
-
         } catch (\Throwable $e) {
+            $this->data['last_status'] = 'INVALID';
+            $this->data['raw_response'] = $e->getMessage();
+
             Notification::make()
                 ->title('API Key 測試失敗')
                 ->body("錯誤訊息：{$e->getMessage()}")

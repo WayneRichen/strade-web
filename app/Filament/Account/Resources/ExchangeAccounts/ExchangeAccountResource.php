@@ -28,7 +28,8 @@ class ExchangeAccountResource extends Resource
     public static function getEloquentQuery(): Builder
     {
         return parent::getEloquentQuery()
-            ->where('user_id', auth()->id());  // 只抓自己的資料
+            ->where('user_id', auth()->id())  // 只抓自己的資料
+            ->orderBy('id', 'desc');
     }
 
     public static function getModelLabel(): string

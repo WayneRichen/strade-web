@@ -60,7 +60,7 @@ class UserTradesTable
                     ->sortable(),
 
                 TextColumn::make('pnl_pct')
-                    ->label('ROI (%)')
+                    ->label('盈虧（%）')
                     ->formatStateUsing(fn($state) => number_format($state, 2) . '%')
                     ->color(fn($record) => $record->pnl_pct >= 0 ? 'success' : 'danger')
                     ->sortable(),
@@ -84,7 +84,6 @@ class UserTradesTable
                     ->dateTime('Y-m-d H:i')
                     ->sortable(),
             ])
-            ->defaultSort('created_at', 'desc')
             ->filters([])
             ->recordActions([
                 Action::make('closeOrder')

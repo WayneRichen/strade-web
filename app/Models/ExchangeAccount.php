@@ -16,6 +16,7 @@ class ExchangeAccount extends Model
         'params',
         'last_connected_at',
         'last_status',
+        'raw_response',
     ];
 
     protected $casts = [

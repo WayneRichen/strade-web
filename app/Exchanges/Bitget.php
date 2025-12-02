@@ -32,10 +32,8 @@ class Bitget
 
     /**
      * 測試連線
-     *
-     * @return bool
      */
-    public function check(): bool
+    public function check()
     {
         $response = $this->request('GET', '/api/v2/spot/account/info');
 
@@ -43,7 +41,7 @@ class Bitget
             throw new \RuntimeException('Bitget API error: ' . ($response['msg'] ?? 'unknown'));
         }
 
-        return true;
+        return json_encode($response);
     }
 
     /**
@@ -99,7 +97,7 @@ class Bitget
         }
 
         $contents = (string) $response->getBody();
-        $json     = json_decode($contents, true);
+        $json = json_decode($contents, true);
 
         if (!is_array($json)) {
             throw new \RuntimeException('Bitget API invalid JSON: ' . $contents);
