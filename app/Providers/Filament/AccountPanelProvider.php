@@ -8,6 +8,7 @@ use App\Http\Middleware\Authenticate;
 use Filament\Panel;
 use Filament\PanelProvider;
 use Filament\Support\Colors\Color;
+use Filament\Actions\Action;
 
 class AccountPanelProvider extends PanelProvider
 {
@@ -34,6 +35,13 @@ class AccountPanelProvider extends PanelProvider
             ])
             ->authMiddleware([
                 Authenticate::class,
+            ])
+            ->userMenuItems([
+                Action::make('admin')
+                    ->label('系統管理後台')
+                    ->icon('heroicon-o-cog-6-tooth')
+                    ->url(fn() => route('filament.admin.pages.dashboard'))
+                    ->visible(fn() => (bool) auth()->user()?->is_admin),
             ]);
     }
 }
