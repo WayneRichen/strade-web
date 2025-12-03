@@ -16,6 +16,7 @@ class AccountPanelProvider extends PanelProvider
         return $panel
             ->id('account')
             ->path('account')
+            ->favicon(asset('favicon.svg'))
             ->colors([
                 'primary' => Color::Amber,
             ])
