@@ -13,6 +13,8 @@
     <meta name="twitter:title" content="500 - 伺服器錯誤 | {{config('app.name')}}">
     <meta name="twitter:description" content="系統維護中，即將恢復正常。{{config('app.name')}} 致力提供最穩定的加密貨幣自動交易服務。">
     <title>500 - 伺服器錯誤 | {{config('app.name')}}</title>
+    <link rel="icon" type="image/svg+xml" href="{{ asset('favicon.svg') }}">
+    <link rel="alternate icon" type="image/png" href="{{ asset('favicon.png') }}">
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
     <style>

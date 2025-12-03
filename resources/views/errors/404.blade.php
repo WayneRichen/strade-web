@@ -14,6 +14,8 @@
     <meta name="twitter:url" content="{{config('app.url')}}/404">
     <meta name="twitter:title" content="404 - 找不到頁面 | {{config('app.name')}}">
     <meta name="twitter:description" content="找不到此頁面。返回 {{config('app.name')}} 首頁，探索專業的加密貨幣自動交易機器人服務。">
+    <link rel="icon" type="image/svg+xml" href="{{ asset('favicon.svg') }}">
+    <link rel="alternate icon" type="image/png" href="{{ asset('favicon.png') }}">
     <title>404 - 找不到頁面 | {{config('app.name')}}</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">

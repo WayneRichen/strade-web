@@ -21,6 +21,8 @@
     <meta name="twitter:description" content="24/7 自動執行趨勢追蹤策略，風險控管，讓獲利自動化。支援 Bitget，免費開始。">
     <meta name="twitter:site" content="@Strade">
     <meta name="twitter:creator" content="@Strade">
+    <link rel="icon" type="image/svg+xml" href="{{ asset('favicon.svg') }}">
+    <link rel="alternate icon" type="image/png" href="{{ asset('favicon.png') }}">
     <link rel="canonical" href="{{config('app.url')}}">
     <link rel="alternate" hreflang="zh-TW" href="{{config('app.url')}}">
     <link rel="alternate" hreflang="x-default" href="{{config('app.url')}}">
@@ -158,12 +160,24 @@
             <div class="flex justify-between items-center h-16">
                 <div class="flex items-center space-x-2">
                     <div class="w-8 h-8 bg-neon-green rounded-lg flex items-center justify-center">
-                        <svg class="w-5 h-5 text-black" fill="currentColor" viewBox="0 0 24 24">
-                            <path d="M12 2L2 7v10c0 5.55 3.84 10.74 9 12 5.16-1.26 9-6.45 9-12V7l-10-5z" />
+                        <svg class="w-5 h-5 text-black"
+                            viewBox="0 0 24 24"
+                            fill="none"
+                            stroke="currentColor"
+                            stroke-width="1.8"
+                            stroke-linecap="round"
+                            stroke-linejoin="round">
+                            <path d="M4 17 L9 11 L13 14 L18 8 L20 9" />
+                            <circle cx="4" cy="17" r="1.1" fill="currentColor" />
+                            <circle cx="9" cy="11" r="1.1" fill="currentColor" />
+                            <circle cx="13" cy="14" r="1.1" fill="currentColor" />
+                            <circle cx="18" cy="8" r="1.1" fill="currentColor" />
+                            <circle cx="20" cy="9" r="1.1" fill="currentColor" />
                         </svg>
                     </div>
-                    <span class="text-xl font-bold">{{config('app.name')}}</span>
+                    <span class="text-xl font-bold tracking-tight">{{ config('app.name') }}</span>
                 </div>
+
                 <div class="hidden md:flex space-x-8">
                     <a href="#features" class="text-gray-400 hover:text-white transition">功能特色</a>
                     <a href="#market" class="text-gray-400 hover:text-white transition">近期績效</a>

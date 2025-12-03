@@ -13,6 +13,8 @@
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:title" content="403 - 拒絕存取 | {{config('app.name')}}">
     <meta name="twitter:description" content="需要更高權限。查看 {{config('app.name')}} 訂閱方案，解鎖專業交易功能。">
+    <link rel="icon" type="image/svg+xml" href="{{ asset('favicon.svg') }}">
+    <link rel="alternate icon" type="image/png" href="{{ asset('favicon.png') }}">
     <title>403 - 拒絕存取 | {{config('app.name')}}</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
