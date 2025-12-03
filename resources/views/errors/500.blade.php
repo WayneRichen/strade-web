@@ -4,6 +4,14 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="伺服器暫時無法回應。{{config('app.name')}} 工程團隊正在全力修復中。我們提供專業的加密貨幣自動交易服務，請稍後再試或聯繫客服團隊。">
+    <meta name="keywords" content="500錯誤, 伺服器錯誤, 系統維護, {{config('app.name')}}, 加密貨幣交易, 技術支援">
+    <meta name="robots" content="noindex, follow">
+    <meta property="og:type" content="website">
+    <meta property="og:title" content="500 - 伺服器錯誤 | {{config('app.name')}} 加密貨幣自動交易機器人">
+    <meta property="og:description" content="系統暫時維護中。{{config('app.name')}} 提供最穩定的加密貨幣自動交易服務，工程團隊正在處理技術問題，預計很快恢復正常。">
+    <meta name="twitter:title" content="500 - 伺服器錯誤 | {{config('app.name')}}">
+    <meta name="twitter:description" content="系統維護中，即將恢復正常。{{config('app.name')}} 致力提供最穩定的加密貨幣自動交易服務。">
     <title>500 - 伺服器錯誤 | {{config('app.name')}}</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
@@ -48,12 +56,16 @@
         }
 
         @keyframes float {
-            0%, 100% {
+
+            0%,
+            100% {
                 transform: translate(0, 0) scale(1);
             }
+
             33% {
                 transform: translate(50px, -50px) scale(1.1);
             }
+
             66% {
                 transform: translate(-50px, 50px) scale(0.9);
             }
@@ -99,18 +111,23 @@
         }
 
         @keyframes glitchPulse {
-            0%, 100% {
+
+            0%,
+            100% {
                 opacity: 1;
                 transform: scale(1);
             }
+
             25% {
                 opacity: 0.8;
                 transform: scale(1.02) translateX(-2px);
             }
+
             50% {
                 opacity: 1;
                 transform: scale(1.05);
             }
+
             75% {
                 opacity: 0.8;
                 transform: scale(1.02) translateX(2px);
@@ -123,10 +140,15 @@
         }
 
         @keyframes serverBlink {
-            0%, 90%, 100% {
+
+            0%,
+            90%,
+            100% {
                 opacity: 1;
             }
-            45%, 55% {
+
+            45%,
+            55% {
                 opacity: 0.3;
             }
         }
@@ -142,9 +164,11 @@
             0% {
                 stroke-dashoffset: 1000;
             }
+
             50% {
                 stroke-dashoffset: 0;
             }
+
             100% {
                 stroke-dashoffset: -1000;
             }
@@ -156,10 +180,13 @@
         }
 
         @keyframes statusPulse {
-            0%, 100% {
+
+            0%,
+            100% {
                 opacity: 1;
                 transform: scale(1);
             }
+
             50% {
                 opacity: 0.5;
                 transform: scale(1.2);
@@ -176,9 +203,11 @@
             0% {
                 width: 0%;
             }
+
             50% {
                 width: 70%;
             }
+
             100% {
                 width: 100%;
             }
@@ -197,6 +226,7 @@
             0% {
                 transform: translateY(-100%);
             }
+
             100% {
                 transform: translateY(100vh);
             }
@@ -249,19 +279,19 @@
     </div>
 
     <!-- 500 Content -->
-    <section class="min-h-screen flex items-center justify-center px-4 relative z-10">
+    <section class="min-h-screen flex items-center justify-center mt-20 px-4 relative z-10">
         <div class="max-w-4xl mx-auto text-center">
             <!-- Server Icon with Circuit -->
             <div class="mb-8 flex justify-center relative">
                 <svg class="absolute w-64 h-64 opacity-10" viewBox="0 0 200 200">
-                    <path class="circuit-line" d="M 10 100 L 50 100 L 60 90 L 70 110 L 80 100 L 120 100" 
-                          stroke="#8B5CF6" stroke-width="2" fill="none"/>
-                    <path class="circuit-line" d="M 100 10 L 100 50 L 110 60 L 90 70 L 100 80 L 100 120" 
-                          stroke="#EC4899" stroke-width="2" fill="none" style="animation-delay: 1s;"/>
-                    <path class="circuit-line" d="M 190 100 L 150 100 L 140 90 L 130 110 L 120 100 L 80 100" 
-                          stroke="#6366F1" stroke-width="2" fill="none" style="animation-delay: 2s;"/>
+                    <path class="circuit-line" d="M 10 100 L 50 100 L 60 90 L 70 110 L 80 100 L 120 100"
+                        stroke="#8B5CF6" stroke-width="2" fill="none" />
+                    <path class="circuit-line" d="M 100 10 L 100 50 L 110 60 L 90 70 L 100 80 L 100 120"
+                        stroke="#EC4899" stroke-width="2" fill="none" style="animation-delay: 1s;" />
+                    <path class="circuit-line" d="M 190 100 L 150 100 L 140 90 L 130 110 L 120 100 L 80 100"
+                        stroke="#6366F1" stroke-width="2" fill="none" style="animation-delay: 2s;" />
                 </svg>
-                
+
                 <div class="server-icon w-32 h-32 bg-purple-500 bg-opacity-10 rounded-2xl flex items-center justify-center border-2 border-purple-500 relative z-10">
                     <svg class="w-16 h-16 text-purple-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"

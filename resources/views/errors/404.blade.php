@@ -4,6 +4,16 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="抱歉！您訪問的頁面不存在。{{config('app.name')}} 提供專業的加密貨幣自動交易機器人服務，24/7 執行趨勢追蹤策略，讓您的交易更聰明、更高效。">
+    <meta name="keywords" content="404錯誤, 頁面不存在, {{config('app.name')}}, 加密貨幣交易, 自動交易機器人, 量化交易">
+    <meta name="robots" content="noindex, follow">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="{{config('app.url')}}/404">
+    <meta property="og:title" content="404 - 找不到頁面 | {{config('app.name')}} 加密貨幣自動交易機器人">
+    <meta property="og:description" content="糟糕！找不到這個頁面。探索 {{config('app.name')}} 專業的加密貨幣自動交易服務，24/7 不間斷執行策略，自動管理您的投資組合。">
+    <meta name="twitter:url" content="{{config('app.url')}}/404">
+    <meta name="twitter:title" content="404 - 找不到頁面 | {{config('app.name')}}">
+    <meta name="twitter:description" content="找不到此頁面。返回 {{config('app.name')}} 首頁，探索專業的加密貨幣自動交易機器人服務。">
     <title>404 - 找不到頁面 | {{config('app.name')}}</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
@@ -44,12 +54,16 @@
         }
 
         @keyframes float {
-            0%, 100% {
+
+            0%,
+            100% {
                 transform: translate(0, 0) scale(1);
             }
+
             33% {
                 transform: translate(50px, -50px) scale(1.1);
             }
+
             66% {
                 transform: translate(-50px, 50px) scale(0.9);
             }
@@ -95,10 +109,13 @@
         }
 
         @keyframes pulse {
-            0%, 100% {
+
+            0%,
+            100% {
                 opacity: 1;
                 transform: scale(1);
             }
+
             50% {
                 opacity: 0.8;
                 transform: scale(1.05);
@@ -135,24 +152,32 @@
         }
 
         @keyframes glitch-1 {
-            0%, 100% {
+
+            0%,
+            100% {
                 transform: translate(0);
             }
+
             33% {
                 transform: translate(-2px, 2px);
             }
+
             66% {
                 transform: translate(2px, -2px);
             }
         }
 
         @keyframes glitch-2 {
-            0%, 100% {
+
+            0%,
+            100% {
                 transform: translate(0);
             }
+
             33% {
                 transform: translate(2px, -2px);
             }
+
             66% {
                 transform: translate(-2px, 2px);
             }
@@ -167,6 +192,7 @@
             from {
                 transform: rotate(0deg);
             }
+
             to {
                 transform: rotate(360deg);
             }
@@ -210,7 +236,7 @@
     </div>
 
     <!-- 404 Content -->
-    <section class="min-h-screen flex items-center justify-center px-4 relative z-10">
+    <section class="min-h-screen flex items-center justify-center mt-20 px-4 relative z-10">
         <div class="max-w-4xl mx-auto text-center">
             <!-- Crypto Icon -->
             <div class="mb-8 flex justify-center">
@@ -300,7 +326,7 @@
     <script>
         // Smooth scroll for anchor links
         document.querySelectorAll('a[href^="/#"]').forEach(anchor => {
-            anchor.addEventListener('click', function (e) {
+            anchor.addEventListener('click', function(e) {
                 // Allow the link to navigate to home page with hash
             });
         });

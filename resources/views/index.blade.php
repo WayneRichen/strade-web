@@ -4,6 +4,26 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="{{config('app.name')}} 提供專業的加密貨幣自動交易機器人服務。24/7 執行趨勢追蹤策略，內建風險控管與停損機制，支援 Bitget 交易所。立即免費開始，讓獲利自動化。">
+    <meta name="keywords" content="加密貨幣交易, 自動交易機器人, 量化交易, 趨勢追蹤策略, Bitcoin, BTC, Bitget, 加密貨幣投資, 自動化交易, {{config('app.name')}}">
+    <meta name="author" content="{{config('app.name')}} Services Inc.">
+    <meta name="robots" content="index, follow">
+    <meta name="googlebot" content="index, follow">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="{{config('app.url')}}">
+    <meta property="og:title" content="{{config('app.name')}} - 加密貨幣自動交易機器人 | 24/7 趨勢追蹤策略">
+    <meta property="og:description" content="專業量化交易策略，24/7 自動執行。趨勢追蹤、風險控管、歷史績效回測。支援 Bitget 交易所，免費開始使用。">
+    <meta property="og:image:alt" content="{{config('app.name')}} 加密貨幣自動交易機器人">
+    <meta property="og:site_name" content="{{config('app.name')}}">
+    <meta property="og:locale" content="zh_TW">
+    <meta name="twitter:url" content="{{config('app.url')}}">
+    <meta name="twitter:title" content="Strade - 加密貨幣自動交易機器人">
+    <meta name="twitter:description" content="24/7 自動執行趨勢追蹤策略，風險控管，讓獲利自動化。支援 Bitget，免費開始。">
+    <meta name="twitter:site" content="@Strade">
+    <meta name="twitter:creator" content="@Strade">
+    <link rel="canonical" href="{{config('app.url')}}">
+    <link rel="alternate" hreflang="zh-TW" href="{{config('app.url')}}">
+    <link rel="alternate" hreflang="x-default" href="{{config('app.url')}}">
     <title>{{config('app.name')}} - 加密貨幣自動交易機器人</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
@@ -276,27 +296,27 @@
                             </tr>
                         </thead>
                         <?php foreach ($trades as $trade): ?>
-                        <tbody>
-                            <tr class="border-b border-gray-800 hover:bg-white hover:bg-opacity-5">
-                                <td class="py-4 px-6"><?=$trade['entry_at']->format('Y-m-d')?></td>
-                                <td class="py-4 px-6 font-semibold">
-                                    <?=number_format($trade['entry_price'], 2, '.', ',')?>
-                                </td>
-                                <td class="py-4 px-6"><?=$trade['exit_at']->format('Y-m-d')?></td>
-                                <td class="py-4 px-6 font-semibold">
-                                    <?=number_format($trade['exit_price'], 2, '.', ',')?>
-                                </td>
-                                <td class="py-4 px-6">
-                                    <?php    if ($trade['pnl_pct'] > 0): ?>
-                                    <span
-                                        class="text-green-500 font-semibold"><?=number_format($trade['pnl_pct'], '2', '.')?>%</span>
-                                    <?php    else: ?>
-                                    <span
-                                        class="text-red-500 font-semibold"><?=number_format($trade['pnl_pct'], '2', '.')?>%</span>
-                                    <?php    endif; ?>
-                                </td>
-                            </tr>
-                        </tbody>
+                            <tbody>
+                                <tr class="border-b border-gray-800 hover:bg-white hover:bg-opacity-5">
+                                    <td class="py-4 px-6"><?= $trade['entry_at']->format('Y-m-d') ?></td>
+                                    <td class="py-4 px-6 font-semibold">
+                                        <?= number_format($trade['entry_price'], 2, '.', ',') ?>
+                                    </td>
+                                    <td class="py-4 px-6"><?= $trade['exit_at']->format('Y-m-d') ?></td>
+                                    <td class="py-4 px-6 font-semibold">
+                                        <?= number_format($trade['exit_price'], 2, '.', ',') ?>
+                                    </td>
+                                    <td class="py-4 px-6">
+                                        <?php if ($trade['pnl_pct'] > 0): ?>
+                                            <span
+                                                class="text-green-500 font-semibold"><?= number_format($trade['pnl_pct'], '2', '.') ?>%</span>
+                                        <?php else: ?>
+                                            <span
+                                                class="text-red-500 font-semibold"><?= number_format($trade['pnl_pct'], '2', '.') ?>%</span>
+                                        <?php endif; ?>
+                                    </td>
+                                </tr>
+                            </tbody>
                         <?php endforeach; ?>
                     </table>
                 </div>
@@ -589,7 +609,7 @@
     <footer class="border-t border-gray-800 py-12 px-4">
         <div class="max-w-7xl mx-auto">
             <div class="pt-4 text-center text-sm text-gray-400">
-                <p>&copy; <?=date('Y', time())?> {{config('app.name')}} Services Inc. All rights reserved.</p>
+                <p>&copy; <?= date('Y', time()) ?> {{config('app.name')}} Services Inc. All rights reserved.</p>
             </div>
     </footer>
 
@@ -659,7 +679,7 @@
             filteredTrades.forEach(trade => {
                 const pnlPct = parseFloat(trade.pnl_pct); // ex: 1.23 = 1.23%
 
-                const grossPct = pnlPct / 100;           // 1.23% → 0.0123
+                const grossPct = pnlPct / 100; // 1.23% → 0.0123
 
                 // = 淨報酬率（未套槓桿）
                 let netPct = grossPct - totalFeeRate;
@@ -701,18 +721,27 @@
             document.getElementById('tradeCount').textContent = filteredTrades.length;
             document.getElementById('winRate').textContent = winRate.toFixed(2) + '%';
             document.getElementById('initialCapital').textContent = '$' +
-                initialAmount.toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+                initialAmount.toLocaleString('en-US', {
+                    minimumFractionDigits: 2,
+                    maximumFractionDigits: 2
+                });
             document.getElementById('finalCapital').textContent = '$' +
-                finalCapital.toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+                finalCapital.toLocaleString('en-US', {
+                    minimumFractionDigits: 2,
+                    maximumFractionDigits: 2
+                });
             document.getElementById('maxDrawdown').textContent = maxDrawdown.toFixed(2) + '%';
 
             document.getElementById('resultsSection').classList.remove('hidden');
-            document.getElementById('resultsSection').scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+            document.getElementById('resultsSection').scrollIntoView({
+                behavior: 'smooth',
+                block: 'nearest'
+            });
         }
 
 
         // Initialize Flatpickr for date pickers
-        document.addEventListener('DOMContentLoaded', function () {
+        document.addEventListener('DOMContentLoaded', function() {
             const defaultEndDate = new Date();
             const defaultStartDate = new Date(defaultEndDate);
             defaultStartDate.setDate(defaultStartDate.getDate() - 30);
@@ -726,7 +755,7 @@
                 maxDate: DATA_END_DATE,
                 dateFormat: "Y-m-d",
                 theme: "dark",
-                onChange: function (selectedDates, dateStr) {
+                onChange: function(selectedDates, dateStr) {
                     // Update end date minDate when start date changes
                     const endDatePicker = document.getElementById('endDate')._flatpickr;
                     if (endDatePicker) {
@@ -746,11 +775,14 @@
 
         // Smooth scroll
         document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-            anchor.addEventListener('click', function (e) {
+            anchor.addEventListener('click', function(e) {
                 e.preventDefault();
                 const target = document.querySelector(this.getAttribute('href'));
                 if (target) {
-                    target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
                 }
             });
         });

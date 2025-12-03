@@ -4,6 +4,15 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="拒絕存取。您沒有權限訪問此頁面。升級 {{config('app.name')}} 訂閱方案，解鎖更多專業交易功能，最多支援 10 組交易機器人與自訂槓桿倍數。">
+    <meta name="keywords" content="403錯誤, 拒絕存取, 權限不足, {{config('app.name')}}, 訂閱方案, 加密貨幣交易">
+    <meta name="robots" content="noindex, follow">
+    <meta property="og:type" content="website">
+    <meta property="og:title" content="403 - 拒絕存取 | {{config('app.name')}} 加密貨幣自動交易機器人">
+    <meta property="og:description" content="此頁面需要更高的權限。升級 {{config('app.name')}} 專業方案，享受無限制交易額度、複利模式與多組機器人並行。">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="403 - 拒絕存取 | {{config('app.name')}}">
+    <meta name="twitter:description" content="需要更高權限。查看 {{config('app.name')}} 訂閱方案，解鎖專業交易功能。">
     <title>403 - 拒絕存取 | {{config('app.name')}}</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
@@ -48,12 +57,16 @@
         }
 
         @keyframes float {
-            0%, 100% {
+
+            0%,
+            100% {
                 transform: translate(0, 0) scale(1);
             }
+
             33% {
                 transform: translate(50px, -50px) scale(1.1);
             }
+
             66% {
                 transform: translate(-50px, 50px) scale(0.9);
             }
@@ -99,10 +112,13 @@
         }
 
         @keyframes pulse {
-            0%, 100% {
+
+            0%,
+            100% {
                 opacity: 1;
                 transform: scale(1);
             }
+
             50% {
                 opacity: 0.8;
                 transform: scale(1.05);
@@ -115,13 +131,24 @@
         }
 
         @keyframes shake {
-            0%, 100% {
+
+            0%,
+            100% {
                 transform: rotate(0deg);
             }
-            10%, 30%, 50%, 70%, 90% {
+
+            10%,
+            30%,
+            50%,
+            70%,
+            90% {
                 transform: rotate(-5deg);
             }
-            20%, 40%, 60%, 80% {
+
+            20%,
+            40%,
+            60%,
+            80% {
                 transform: rotate(5deg);
             }
         }
@@ -132,9 +159,12 @@
         }
 
         @keyframes shieldPulse {
-            0%, 100% {
+
+            0%,
+            100% {
                 box-shadow: 0 0 0 0 rgba(255, 107, 107, 0.7);
             }
+
             50% {
                 box-shadow: 0 0 0 20px rgba(255, 107, 107, 0);
             }
@@ -142,13 +172,11 @@
 
         /* Warning Stripes */
         .warning-stripes {
-            background: repeating-linear-gradient(
-                45deg,
-                rgba(255, 107, 107, 0.1),
-                rgba(255, 107, 107, 0.1) 10px,
-                rgba(255, 193, 7, 0.1) 10px,
-                rgba(255, 193, 7, 0.1) 20px
-            );
+            background: repeating-linear-gradient(45deg,
+                    rgba(255, 107, 107, 0.1),
+                    rgba(255, 107, 107, 0.1) 10px,
+                    rgba(255, 193, 7, 0.1) 10px,
+                    rgba(255, 193, 7, 0.1) 20px);
             animation: stripeMove 1s linear infinite;
         }
 
@@ -156,6 +184,7 @@
             0% {
                 background-position: 0 0;
             }
+
             100% {
                 background-position: 28px 0;
             }
@@ -167,10 +196,13 @@
         }
 
         @keyframes deniedPulse {
-            0%, 100% {
+
+            0%,
+            100% {
                 transform: scale(1);
                 opacity: 1;
             }
+
             50% {
                 transform: scale(1.05);
                 opacity: 0.9;
@@ -219,7 +251,7 @@
     <div class="fixed bottom-0 left-0 right-0 h-2 warning-stripes z-40"></div>
 
     <!-- 403 Content -->
-    <section class="min-h-screen flex items-center justify-center px-4 relative z-10">
+    <section class="min-h-screen flex items-center justify-center mt-20 px-4 relative z-10">
         <div class="max-w-4xl mx-auto text-center">
             <!-- Lock Icon with Shield -->
             <div class="mb-8 flex justify-center relative">
