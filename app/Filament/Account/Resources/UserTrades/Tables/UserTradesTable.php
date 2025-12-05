@@ -72,7 +72,8 @@ class UserTradesTable
                         'gray' => 'OPEN',
                         'gray' => 'CLOSED',
                         'danger' => 'ERROR',
-                    ]),
+                    ])
+                    ->tooltip(fn ($record) => $record->error_message),
 
                 TextColumn::make('opened_at')
                     ->label('開倉時間')
@@ -89,7 +90,7 @@ class UserTradesTable
                 Action::make('closeOrder')
                     ->label('手動關單')
                     ->icon(Heroicon::AdjustmentsHorizontal)
-                    ->visible(fn($record) => $record->status !== 'CLOSED') // 已關閉就不顯示
+                    ->visible(fn($record) => $record->status == 'OPEN')
                     ->requiresConfirmation()
                     ->modalHeading('你確定要將此倉位標記為 CLOSED 嗎？')
                     ->modalDescription('⚠️ 此動作只會變更後台狀態，不會對交易所下任何指令。請確認你真的要標記為已關閉。')
@@ -97,6 +98,7 @@ class UserTradesTable
                     ->modalCancelActionLabel('取消')
                     ->action(function ($record) {
                         $record->update([
+                            'error_message' => '使用者手動關單',
                             'status' => 'CLOSED',
                         ]);
                     })
