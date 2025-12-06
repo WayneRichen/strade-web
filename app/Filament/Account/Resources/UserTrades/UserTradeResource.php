@@ -25,9 +25,7 @@ class UserTradeResource extends Resource
 
     public static function getEloquentQuery(): Builder
     {
-        return parent::getEloquentQuery()
-            ->where('user_id', auth()->id())  // 只抓自己的資料
-            ->orderBy('created_at', 'desc');
+        return parent::getEloquentQuery()->where('user_id', auth()->id());
     }
 
     public static function getModelLabel(): string

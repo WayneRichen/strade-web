@@ -15,7 +15,7 @@ class UserTradesTable
         return $table
             ->columns([
                 TextColumn::make('bot.name')
-                    ->label('Bot')
+                    ->label('交易機器人')
                     ->sortable()
                     ->searchable(),
 
@@ -44,12 +44,12 @@ class UserTradesTable
                     ->sortable(),
 
                 TextColumn::make('entry_price')
-                    ->label('進場價')
+                    ->label('開倉價格')
                     ->numeric(2)
                     ->sortable(),
 
                 TextColumn::make('exit_price')
-                    ->label('出場價')
+                    ->label('平倉價格')
                     ->numeric(2)
                     ->sortable(),
 
@@ -73,7 +73,7 @@ class UserTradesTable
                         'gray' => 'CLOSED',
                         'danger' => 'ERROR',
                     ])
-                    ->tooltip(fn ($record) => $record->error_message),
+                    ->tooltip(fn($record) => $record->error_message),
 
                 TextColumn::make('opened_at')
                     ->label('開倉時間')
@@ -86,6 +86,7 @@ class UserTradesTable
                     ->sortable(),
             ])
             ->filters([])
+            ->defaultSort('created_at', 'desc')
             ->recordActions([
                 Action::make('closeOrder')
                     ->label('手動關單')
