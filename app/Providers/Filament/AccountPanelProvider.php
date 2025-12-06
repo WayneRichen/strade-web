@@ -37,11 +37,24 @@ class AccountPanelProvider extends PanelProvider
                 Authenticate::class,
             ])
             ->userMenuItems([
+                Action::make('subscription-plan')
+                    ->label(fn() => '目前方案：' . (auth()->user()->subscription_plan ?? '免費'))
+                    ->icon('heroicon-o-credit-card')
+                    ->disabled()
+                    ->color('gray'),
+
+                Action::make('subscription-plan-ends')
+                    ->visible(fn() => auth()->user()->subscription_ends_at ?? false)
+                    ->label(fn() => '到期日：' . date('Y-m-d', strtotime(auth()->user()->subscription_ends_at)))
+                    ->icon('heroicon-o-calendar-days')
+                    ->disabled()
+                    ->color('gray'),
+
                 Action::make('admin')
                     ->label('系統管理後台')
                     ->icon('heroicon-o-cog-6-tooth')
                     ->url(fn() => route('filament.admin.pages.dashboard'))
-                    ->visible(fn() => (bool) auth()->user()?->is_admin),
+                    ->visible(fn() => (bool) auth()->user()->getRoleNames()->isNotEmpty()),
             ]);
     }
 }

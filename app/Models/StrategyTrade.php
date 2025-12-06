@@ -93,4 +93,9 @@ class StrategyTrade extends Model
 
         return $query;
     }
+
+    public function strategy()
+    {
+        return $this->belongsTo(Strategy::class);
+    }
 }

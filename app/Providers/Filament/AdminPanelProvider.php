@@ -2,6 +2,7 @@
 
 namespace App\Providers\Filament;
 
+use BezhanSalleh\FilamentShield\FilamentShieldPlugin;
 use Filament\Http\Middleware\Authenticate;
 use Filament\Pages\Dashboard;
 use Filament\Panel;
@@ -34,6 +35,9 @@ class AdminPanelProvider extends PanelProvider
             ->middleware([
                 'web'
             ])
+            ->plugins([
+                FilamentShieldPlugin::make(),
+            ])
             ->authMiddleware([
                 Authenticate::class,
             ])
@@ -42,7 +46,7 @@ class AdminPanelProvider extends PanelProvider
                     ->label('使用者前台')
                     ->icon('heroicon-o-globe-alt')
                     ->url(fn() => route('filament.account.pages.dashboard'))
-                    ->visible(fn() => (bool) auth()->user()?->is_admin),
+                    ->visible(fn() => (bool) auth()->user()->getRoleNames()->isNotEmpty()),
             ]);
     }
 }
