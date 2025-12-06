@@ -19,7 +19,7 @@ return new class extends Migration {
             $table->json('properties')->nullable()->comment('詳細變更紀錄：old / new / dirty 等');
             $table->string('ip_address', 45)->nullable();
             $table->text('user_agent')->nullable();
-            $table->string('url')->nullable();
+            $table->string('url', 500)->nullable();
 
             $table->timestamps();
 

@@ -55,6 +55,14 @@ class AccountPanelProvider extends PanelProvider
                     ->icon('heroicon-o-cog-6-tooth')
                     ->url(fn() => route('filament.admin.pages.dashboard'))
                     ->visible(fn() => (bool) auth()->user()->getRoleNames()->isNotEmpty()),
+
+                Action::make('logout')
+                    ->label('登出')
+                    ->icon('heroicon-o-arrow-left-on-rectangle')
+                    ->action(function() {
+                        auth()->logout();
+                        redirect('/');
+                    }),
             ]);
     }
 }

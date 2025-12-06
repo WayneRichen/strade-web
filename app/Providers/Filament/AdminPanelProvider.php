@@ -47,6 +47,14 @@ class AdminPanelProvider extends PanelProvider
                     ->icon('heroicon-o-globe-alt')
                     ->url(fn() => route('filament.account.pages.dashboard'))
                     ->visible(fn() => (bool) auth()->user()->getRoleNames()->isNotEmpty()),
+
+                Action::make('logout')
+                    ->label('登出系統')
+                    ->icon('heroicon-o-arrow-left-on-rectangle')
+                    ->action(function () {
+                        auth()->logout();
+                        redirect('/');
+                    }),
             ]);
     }
 }

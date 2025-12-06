@@ -24,6 +24,7 @@ class GoogleController extends Controller
                 'name' => $googleUser->name,
                 'avatar' => $googleUser->avatar,
                 'email' => $googleUser->email,
+                'last_login_at' => now(),
             ]
         );
 
