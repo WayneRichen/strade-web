@@ -17,7 +17,6 @@ return new class extends Migration
             $table->string('name');
             $table->string('avatar')->nullable();
             $table->string('email')->unique();
-            $table->boolean('is_admin')->nullable();
             $table->rememberToken();
 
             $table->unsignedBigInteger('invited_by')->nullable()->comment('被誰邀請 user.id');
