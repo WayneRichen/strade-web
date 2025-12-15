@@ -9,6 +9,8 @@ use App\Models\ExchangeSymbol;
 use Filament\Forms\Components\Hidden;
 use Filament\Forms\Components\Placeholder;
 use Filament\Forms\Components\Select;
+use Filament\Forms\Components\Slider;
+use Filament\Forms\Components\Slider\Enums\PipsMode;
 use Filament\Forms\Components\TextInput;
 use Filament\Schemas\Schema;
 use Filament\Schemas\Components\Section;
@@ -160,25 +162,39 @@ class BotForm
                     Step::make('填入參數')
                         ->description('設定交易商品與基本參數')
                         ->schema([
-                            TextInput::make('name')
-                                ->label('自訂 Bot 名稱')
-                                ->required(),
+                            Section::make()
+                                ->columnSpan(2)
+                                ->schema([
+                                    TextInput::make('name')
+                                        ->label('自訂 Bot 名稱')
+                                        ->required(),
 
-                            TextInput::make('base_order_usdt')
-                                ->label('投入金額 (USDT)')
-                                ->numeric()
-                                ->minValue(10)
-                                ->maxValue(500)
-                                ->default(100)
-                                ->required(),
+                                    TextInput::make('base_order_usdt')
+                                        ->label('投入金額 (USDT)')
+                                        ->numeric()
+                                        ->minValue(10)
+                                        ->maxValue(500)
+                                        ->default(100)
+                                        ->required(),
 
-                            TextInput::make('leverage')
-                                ->label('槓桿倍數')
-                                ->numeric()
-                                ->minValue(1)
-                                ->maxValue(100)
-                                ->default(1)
-                                ->required(),
+                                    Slider::make('leverage')
+                                        ->label('槓桿倍數')
+                                        ->range(1, 100)
+                                        ->step(1)
+                                        ->fillTrack()
+                                        ->default(1)
+                                        ->pips(PipsMode::Positions)
+                                        ->decimalPlaces(0)
+                                        ->pipsValues([0, 25, 50, 75, 100])
+                                        ->tooltips()
+                                        ->required(),
+                                ])
+                                ->columns(2),
+
+                            Placeholder::make('summary_tip')
+                                ->label('提示')
+                                ->content('設定變更將於下一筆交易訊號後開始套用，現有持倉不受影響。')
+                                ->visible(fn(?Model $record) => filled($record)),
 
                             // 預留給未來動態參數用
                             // Group::make()->schema(fn (Get $get) => $this->buildDynamicParamsSchema($get)),
