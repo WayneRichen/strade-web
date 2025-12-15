@@ -39,6 +39,7 @@ class BotForm
 
                                     // 找出已經被某個 Bot 綁定過的帳戶 id
                                     $usedAccountIds = Bot::query()
+                                        ->where('status', 'RUNNING')
                                         ->whereIn('exchange_account_id', $accounts->pluck('id'))
                                         ->pluck('exchange_account_id')
                                         ->all();
@@ -54,7 +55,7 @@ class BotForm
                                         return [$account->id => $label];
                                     });
                                 })
-                                ->disabled(fn (?Bot $record) => filled($record))
+                                ->disabled(fn(?Bot $record) => filled($record))
                                 ->disableOptionWhen(function (string $value, ?Model $record): bool {
                                     /** @var Bot|null $record */
                                     // 如果是現在這筆 Bot 用的帳戶，就不要 disable
@@ -63,7 +64,7 @@ class BotForm
                                     }
 
                                     // 其他 Bot 有用到這個帳戶，就 disable
-                                    return Bot::where('exchange_account_id', $value)->exists();
+                                    return Bot::where('exchange_account_id', $value)->where('status', 'RUNNING')->exists();
                                 })
                                 ->required()
                                 ->searchable()
@@ -99,7 +100,7 @@ class BotForm
                     // Step 2：選策略
                     Step::make('選策略')
                         ->description('選擇要使用的交易策略')
-                        ->disabled(fn (?Bot $record) => filled($record))
+                        ->disabled(fn(?Bot $record) => filled($record))
                         ->schema([
                             Select::make('strategy_id')
                                 ->label('策略')
