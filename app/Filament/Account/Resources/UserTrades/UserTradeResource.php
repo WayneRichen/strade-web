@@ -21,7 +21,7 @@ class UserTradeResource extends Resource
 
     protected static string|BackedEnum|null $navigationIcon = Heroicon::ClipboardDocumentList;
 
-    protected static ?string $recordTitleAttribute = 'UserTrade';
+    protected static ?string $recordTitleAttribute = null;
 
     public static function getEloquentQuery(): Builder
     {

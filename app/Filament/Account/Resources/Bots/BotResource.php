@@ -21,7 +21,7 @@ class BotResource extends Resource
 
     protected static string|BackedEnum|null $navigationIcon = Heroicon::CommandLine;
 
-    protected static ?string $recordTitleAttribute = 'Bot';
+    protected static ?string $recordTitleAttribute = 'name';
 
     protected static ?string $navigationLabel = '交易機器人';
 

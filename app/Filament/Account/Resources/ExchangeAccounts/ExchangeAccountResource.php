@@ -21,7 +21,7 @@ class ExchangeAccountResource extends Resource
 
     protected static string|BackedEnum|null $navigationIcon = Heroicon::BuildingLibrary;
 
-    protected static ?string $recordTitleAttribute = 'ExchangeAccount';
+    protected static ?string $recordTitleAttribute = 'name';
 
     protected static ?string $navigationLabel = '交易所帳戶';
 
