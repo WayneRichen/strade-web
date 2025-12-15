@@ -13,6 +13,7 @@ return new class extends Migration
     {
         Schema::create('users', function (Blueprint $table) {
             $table->id();
+            $table->unsignedBigInteger('uid')->unique()->comment('對外使用者 UID');
             $table->string('google_id')->nullable()->unique();
             $table->string('name');
             $table->string('avatar')->nullable();

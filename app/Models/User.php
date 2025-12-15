@@ -3,10 +3,12 @@
 namespace App\Models;
 
 use App\Models\Concerns\LogsActivity;
+use App\Support\UserUid;
 use Filament\Panel;
 use Filament\Models\Contracts\FilamentUser;
 use Filament\Models\Contracts\HasAvatar;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Spatie\Permission\Traits\HasRoles;
@@ -24,6 +26,7 @@ class User extends Authenticatable implements FilamentUser, HasAvatar
      * @var list<string>
      */
     protected $fillable = [
+        'uid',
         'google_id',
         'name',
         'avatar',
@@ -51,8 +54,14 @@ class User extends Authenticatable implements FilamentUser, HasAvatar
      */
     protected function casts(): array
     {
-        return [
-        ];
+        return [];
+    }
+
+    protected static function booted()
+    {
+        static::creating(function ($user) {
+            $user->uid ??= app(UserUid::class)->generate();
+        });
     }
 
     public function canAccessPanel(Panel $panel): bool
@@ -76,5 +85,28 @@ class User extends Authenticatable implements FilamentUser, HasAvatar
     public function invitedBy()
     {
         return $this->belongsTo(User::class, 'invited_by');
+    }
+
+    public function couponUsages(): HasMany
+    {
+        return $this->hasMany(CouponUsage::class);
+    }
+
+    public function discounts(): HasMany
+    {
+        return $this->hasMany(UserDiscount::class);
+    }
+
+    /**
+     * 常用：取得目前有效的折扣（終身折扣 expired_at = null 也算）
+     */
+    public function activeDiscounts(): HasMany
+    {
+        return $this->discounts()
+            ->where('is_active', true)
+            ->where(function ($q) {
+                $q->whereNull('expired_at')
+                    ->orWhere('expired_at', '>', now());
+            });
     }
 }

@@ -74,6 +74,7 @@ return new class extends Migration {
             $table->unsignedInteger('exchange_id')->comment('對應 exchanges.id');
             $table->string('name', 100)->nullable()->comment('使用者自訂名稱');
             $table->json('params')->comment('使用者的交易所的 API Key');
+            $table->string('exchange_uid', 50)->nullable()->comment('交易所 UID');
             $table->dateTime('last_connected_at')->nullable();
             $table->string('last_status', 50)->nullable(); // OK / INVALID_KEY 等文字
             $table->text('raw_response')->nullable();

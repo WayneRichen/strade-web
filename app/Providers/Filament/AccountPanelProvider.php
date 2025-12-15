@@ -7,8 +7,11 @@ use App\Filament\Account\Widgets\ActiveBots;
 use App\Http\Middleware\Authenticate;
 use Filament\Panel;
 use Filament\PanelProvider;
-use Filament\Support\Colors\Color;
 use Filament\Actions\Action;
+use Filament\Support\Colors\Color;
+use Filament\Support\Facades\FilamentView;
+use Filament\View\PanelsRenderHook;
+use Illuminate\Support\Facades\Blade;
 
 class AccountPanelProvider extends PanelProvider
 {
@@ -37,6 +40,14 @@ class AccountPanelProvider extends PanelProvider
                 Authenticate::class,
             ])
             ->userMenuItems([
+                Action::make('copyUid')
+                    ->label(fn() => 'UID: ' . auth()->user()->uid)
+                    ->icon('heroicon-o-clipboard-document')
+                    ->action(function ($livewire) {
+                        $uid = auth()->user()->uid;
+                        $livewire->dispatch('copy-to-clipboard', $uid);
+                    }),
+
                 Action::make('subscription-plan')
                     ->label(fn() => '目前方案：' . (auth()->user()->subscription_plan ?? '免費'))
                     ->icon('heroicon-o-credit-card')
@@ -59,10 +70,34 @@ class AccountPanelProvider extends PanelProvider
                 Action::make('logout')
                     ->label('登出')
                     ->icon('heroicon-o-arrow-left-on-rectangle')
-                    ->action(function() {
+                    ->action(function () {
                         auth()->logout();
                         redirect('/');
                     }),
             ]);
+    }
+
+    public function boot(): void
+    {
+        FilamentView::registerRenderHook(
+            PanelsRenderHook::SCRIPTS_AFTER,
+            fn(): string => Blade::render(<<<'BLADE'
+                <script>
+                    document.addEventListener('livewire:initialized', () => {
+                        Livewire.on('copy-to-clipboard', (event) => {
+                            navigator.clipboard.writeText(event).then(() => {
+                                // Optional: Show a notification (Filament uses their own notification system)
+                                console.log('Copied to clipboard:', event);
+                                if (window.$tooltip) {
+                                    window.$tooltip('UID 已複製', { timeout: 1500 });
+                                }
+                            }).catch(err => {
+                                console.error('Could not copy text: ', err);
+                            });
+                        });
+                    });
+                </script>
+            BLADE),
+        );
     }
 }
