@@ -2,6 +2,7 @@
 
 namespace App\Filament\Account\Resources\Bots\Tables;
 
+use App\Filament\Account\Resources\Bots\BotResource;
 use Filament\Actions\EditAction;
 use Filament\Support\Icons\Heroicon;
 use Filament\Tables\Columns\TextColumn;
@@ -39,7 +40,17 @@ class BotsTable
                 TextColumn::make('status')
                     ->label('狀態')
                     ->badge()
-                    ->sortable(),
+                    ->formatStateUsing(fn(string $state) => match ($state) {
+                        'RUNNING' => '執行中',
+                        'STOPPED' => '已停止',
+                        'ERROR' => '錯誤',
+                        default => $state,
+                    })
+                    ->colors([
+                        'success' => 'RUNNING',
+                        'gray' => 'STOPPED',
+                        'danger' => 'ERROR',
+                    ]),
                 TextColumn::make('started_at')
                     ->label('開始時間')
                     ->sortable(),
@@ -59,11 +70,15 @@ class BotsTable
                 //
             ])
             ->defaultSort('created_at', 'desc')
+            ->recordUrl(
+                fn($record) => $record->status === 'STOPPED'
+                    ? null
+                    : BotResource::getUrl('edit', ['record' => $record])
+            )
             ->recordActions([
-                EditAction::make(),
+                EditAction::make()->hidden(fn($record) => $record->status === 'STOPPED'),
             ])
-            ->toolbarActions([
-            ])
+            ->toolbarActions([])
             ->emptyStateIcon(Heroicon::CommandLine)
             ->emptyStateHeading('還沒有交易機器人')
             ->emptyStateDescription('連結交易所之後就可以開始新增囉！');

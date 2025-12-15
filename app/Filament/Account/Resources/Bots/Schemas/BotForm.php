@@ -54,6 +54,7 @@ class BotForm
                                         return [$account->id => $label];
                                     });
                                 })
+                                ->disabled(fn (?Bot $record) => filled($record))
                                 ->disableOptionWhen(function (string $value, ?Model $record): bool {
                                     /** @var Bot|null $record */
                                     // 如果是現在這筆 Bot 用的帳戶，就不要 disable
@@ -98,6 +99,7 @@ class BotForm
                     // Step 2：選策略
                     Step::make('選策略')
                         ->description('選擇要使用的交易策略')
+                        ->disabled(fn (?Bot $record) => filled($record))
                         ->schema([
                             Select::make('strategy_id')
                                 ->label('策略')
