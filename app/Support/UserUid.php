@@ -10,6 +10,17 @@ class UserUid
     protected int $sequence = 0;
     protected int $lastTimestamp = -1;
 
+    public function generateUnique(): string
+    {
+        do {
+            $uid = $this->generate();
+        } while (
+            \App\Models\User::where('uid', $uid)->exists()
+        );
+
+        return $uid;
+    }
+
     public function generate(): int
     {
         $timestamp = (int) floor(microtime(true) * 1000);

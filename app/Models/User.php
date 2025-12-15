@@ -60,7 +60,7 @@ class User extends Authenticatable implements FilamentUser, HasAvatar
     protected static function booted()
     {
         static::creating(function ($user) {
-            $user->uid ??= app(UserUid::class)->generate();
+            $user->uid ??= app(UserUid::class)->generateUnique();
         });
     }
 
