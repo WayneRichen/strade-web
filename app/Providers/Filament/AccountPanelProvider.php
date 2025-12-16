@@ -9,9 +9,6 @@ use Filament\Panel;
 use Filament\PanelProvider;
 use Filament\Actions\Action;
 use Filament\Support\Colors\Color;
-use Filament\Support\Facades\FilamentView;
-use Filament\View\PanelsRenderHook;
-use Illuminate\Support\Facades\Blade;
 
 class AccountPanelProvider extends PanelProvider
 {
@@ -43,10 +40,9 @@ class AccountPanelProvider extends PanelProvider
                 Action::make('copyUid')
                     ->label(fn() => 'UID: ' . auth()->user()->uid)
                     ->icon('heroicon-o-clipboard-document')
-                    ->action(function ($livewire) {
-                        $uid = auth()->user()->uid;
-                        $livewire->dispatch('copy-to-clipboard', $uid);
-                    }),
+                    ->extraAttributes(fn() => [
+                        'x-on:click.prevent' => "window.navigator.clipboard.writeText('" . auth()->user()->uid . "');\$tooltip('\u5df2\u8907\u88fd', {theme: \$store.theme,timeout: 2000,});",
+                    ]),
 
                 Action::make('subscription-plan')
                     ->label(fn() => '目前方案：' . (auth()->user()->subscription_plan ?? '免費'))
@@ -75,29 +71,5 @@ class AccountPanelProvider extends PanelProvider
                         redirect('/');
                     }),
             ]);
-    }
-
-    public function boot(): void
-    {
-        FilamentView::registerRenderHook(
-            PanelsRenderHook::SCRIPTS_AFTER,
-            fn(): string => Blade::render(<<<'BLADE'
-                <script>
-                    document.addEventListener('livewire:initialized', () => {
-                        Livewire.on('copy-to-clipboard', (event) => {
-                            navigator.clipboard.writeText(event).then(() => {
-                                // Optional: Show a notification (Filament uses their own notification system)
-                                console.log('Copied to clipboard:', event);
-                                if (window.$tooltip) {
-                                    window.$tooltip('UID 已複製', { timeout: 1500 });
-                                }
-                            }).catch(err => {
-                                console.error('Could not copy text: ', err);
-                            });
-                        });
-                    });
-                </script>
-            BLADE),
-        );
     }
 }
