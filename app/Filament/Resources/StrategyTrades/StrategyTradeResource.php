@@ -16,7 +16,7 @@ class StrategyTradeResource extends Resource
 
     protected static string|BackedEnum|null $navigationIcon = Heroicon::ClipboardDocumentList;
 
-    protected static ?string $recordTitleAttribute = 'StrategyTrade';
+    protected static ?string $recordTitleAttribute = null;
 
     public static function getModelLabel(): string
     {

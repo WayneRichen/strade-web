@@ -26,24 +26,15 @@ class UsersTable
                     ->label('角色')
                     ->badge()
                     ->separator(', '),
-                TextColumn::make('invitedBy.name')
-                    ->label('推薦人')
-                    ->searchable()
-                    ->sortable(),
-                TextColumn::make('invite_count')
-                    ->label('邀請人數')
-                    ->numeric()
-                    ->sortable(),
                 TextColumn::make('subscription_plan')
                     ->label('方案')
-                    ->searchable(),
+                    ->sortable(),
                 TextColumn::make('subscription_ends_at')
                     ->label('方案到期日')
                     ->dateTime()
                     ->sortable(),
                 TextColumn::make('last_login_at')
                     ->label('最後登入時間')
-                    ->dateTime()
                     ->sortable(),
             ])
             ->filters([

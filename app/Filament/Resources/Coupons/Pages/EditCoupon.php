@@ -1,0 +1,32 @@
+<?php
+
+namespace App\Filament\Resources\Coupons\Pages;
+
+use App\Filament\Resources\Coupons\CouponResource;
+use Filament\Actions\DeleteAction;
+use Filament\Resources\Pages\EditRecord;
+
+class EditCoupon extends EditRecord
+{
+    protected static string $resource = CouponResource::class;
+
+    protected function getHeaderActions(): array
+    {
+        return [
+            DeleteAction::make(),
+        ];
+    }
+
+    public function getBreadcrumbs(): array
+    {
+        return [
+            route('filament.admin.resources.coupons.index') => '折價券',
+            $this->record->code ?? '折價券',
+        ];
+    }
+
+    protected function getRedirectUrl(): string
+    {
+        return $this->getResource()::getUrl('index');
+    }
+}
