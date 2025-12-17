@@ -24,7 +24,8 @@ class ExchangeAccountForm
             ->components([
                 TextInput::make('name')->label('帳戶名稱')->disabled(),
                 Hidden::make('exchange_id'),
-                TextInput::make('exchange_uid')->label('交易所 UID')->disabled(),
+                Hidden::make('last_connected_at'),
+                TextInput::make('exchange_uid')->label('交易所 UID')->readOnly(),
                 Section::make('API 參數')
                     ->schema(function (Get $get) {
                         $components = [];
@@ -54,8 +55,7 @@ class ExchangeAccountForm
                                     ->label($label)
                                     ->password()
                                     ->revealable()
-                                    ->disabled()
-                                    ->dehydrated(false)
+                                    ->dehydrated(true)
                                     ->autocomplete(false)
                                     ->live()
                                     ->required();
@@ -176,7 +176,7 @@ class ExchangeAccountForm
                         ->icon('heroicon-o-check'),
                 ]),
                 Textarea::make('raw_response')->label('交易所回應')
-                    ->columnSpanFull()->disabled(),
+                    ->columnSpanFull()->readOnly(),
             ]);
     }
 }

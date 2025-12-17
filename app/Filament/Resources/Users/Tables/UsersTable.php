@@ -13,6 +13,9 @@ class UsersTable
     {
         return $table
             ->columns([
+                TextColumn::make('uid')
+                    ->label('UID')
+                    ->searchable(),
                 ImageColumn::make('avatar')
                     ->label('')
                     ->circular(),
