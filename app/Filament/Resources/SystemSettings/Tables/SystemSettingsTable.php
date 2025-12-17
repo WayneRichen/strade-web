@@ -26,6 +26,8 @@ class SystemSettingsTable
             ->recordActions([
                 EditAction::make(),
             ])
-            ->toolbarActions([]);
+            ->toolbarActions([])
+            ->paginationPageOptions([20, 50, 100])
+            ->defaultPaginationPageOption(20);
     }
 }
