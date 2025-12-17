@@ -14,6 +14,7 @@ class ExchangeAccount extends Model
         'exchange_id',
         'name',
         'params',
+        'uid',
         'last_connected_at',
         'last_status',
         'raw_response',
