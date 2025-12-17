@@ -37,6 +37,7 @@ class BotForm
                                 ->options(function (?Model $record) {
                                     $accounts = ExchangeAccount::query()
                                         ->where('user_id', Auth::id())
+                                        ->where('last_status', 'OK')
                                         ->get();
 
                                     // 找出已經被某個 Bot 綁定過的帳戶 id

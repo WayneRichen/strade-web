@@ -3,6 +3,8 @@
 namespace App\Filament\Account\Resources\ExchangeAccounts\Pages;
 
 use App\Exchanges\Bitget;
+use App\Services\GoogleSheetService;
+use App\Services\Settings;
 use App\Filament\Account\Resources\ExchangeAccounts\ExchangeAccountResource;
 use Filament\Actions\DeleteAction;
 use Filament\Notifications\Notification;
@@ -73,7 +75,27 @@ class EditExchangeAccount extends EditRecord
 
             $this->data['last_connected_at'] = now();
             $this->data['last_status'] = 'OK';
-            $this->data['raw_response'] = $response;
+            $this->data['raw_response'] = $response['raw_response'];
+            $this->data['uid'] = $response['uid'];
+
+            $whiteListCheck = collect(app(GoogleSheetService::class, [
+                'spreadsheetId' => Settings::get('google.uid_sheet_id'),
+            ])->getAllRows(Settings::get('google.uid_sheet_tab_name')))
+                ->skip(1)
+                ->pluck(1)
+                ->flip()
+                ->has($response['uid']);
+
+            if (!$whiteListCheck) {
+                $this->data['last_status'] = 'INVALID';
+
+                Notification::make()
+                    ->title('API Key 測試成功，但 UID 未在白名單中')
+                    ->body('請聯絡管理員將您的 UID 加入白名單。')
+                    ->warning()
+                    ->send();
+                return;
+            }
 
             Notification::make()
                 ->title('API Key 測試成功')

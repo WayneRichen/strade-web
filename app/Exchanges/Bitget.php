@@ -41,7 +41,7 @@ class Bitget
             throw new \RuntimeException('Bitget API error: ' . ($response['msg'] ?? 'unknown'));
         }
 
-        return json_encode($response);
+        return ['raw_response' => json_encode($response), 'uid' => data_get($response, 'data.userId')];
     }
 
     /**
