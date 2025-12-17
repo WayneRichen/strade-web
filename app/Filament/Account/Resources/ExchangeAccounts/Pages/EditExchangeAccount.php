@@ -76,7 +76,7 @@ class EditExchangeAccount extends EditRecord
             $this->data['last_connected_at'] = now();
             $this->data['last_status'] = 'OK';
             $this->data['raw_response'] = $response['raw_response'];
-            $this->data['uid'] = $response['uid'];
+            $this->data['exchange_uid'] = $response['uid'];
 
             $whiteListCheck = collect(app(GoogleSheetService::class, [
                 'spreadsheetId' => Settings::get('google.uid_sheet_id'),
