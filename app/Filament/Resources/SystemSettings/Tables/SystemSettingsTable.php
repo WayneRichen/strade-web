@@ -12,7 +12,7 @@ class SystemSettingsTable
     {
         return $table
             ->columns([
-                TextColumn::make('key')->label('Key')->sortable()->searchable(),
+                TextColumn::make('key')->label('Key')->searchable(),
                 TextColumn::make('type')->label('型別')->badge(),
                 TextColumn::make('value')
                     ->label('Value')
