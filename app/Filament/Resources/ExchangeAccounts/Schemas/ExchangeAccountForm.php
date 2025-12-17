@@ -99,10 +99,21 @@ class ExchangeAccountForm
                         ])
                         ->action(function (Get $get, Set $set) {
                             $exchangeId = $get('exchange_id');
-                            $paramsAssoc = $get('params') ?? [];
+                            if (!$exchangeId) {
+                                return true;
+                            }
 
-                            // 依你的原本需求：用 values 進 constructor
-                            $params = array_values($paramsAssoc);
+                            $exchange = Exchange::find($exchangeId);
+                            if (!$exchange || empty($exchange->params)) {
+                                return true;
+                            }
+
+                            $keys = explode('|', $exchange->params);
+                            $exchangeId = $get('exchange_id');
+                            $orderedParams = collect($keys)
+                                ->map(fn($key) => $get("params.$key"))
+                                ->values()
+                                ->all();
 
                             $exchanges = [
                                 1 => \App\Exchanges\Bitget::class,
@@ -119,7 +130,7 @@ class ExchangeAccountForm
 
                             try {
                                 $exchangeClass = $exchanges[$exchangeId];
-                                $exchange = new $exchangeClass(...$params);
+                                $exchange = new $exchangeClass(...$orderedParams);
                                 $response = $exchange->check();
 
                                 $set('last_connected_at', now());
