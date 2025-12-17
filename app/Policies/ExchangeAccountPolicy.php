@@ -1,33 +1,70 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Policies;
 
+use Illuminate\Foundation\Auth\User as AuthUser;
 use App\Models\ExchangeAccount;
-use App\Models\User;
+use Illuminate\Auth\Access\HandlesAuthorization;
 
 class ExchangeAccountPolicy
 {
-    /**
-     * Determine whether the user can view the model.
-     */
-    public function view(User $user, ExchangeAccount $account): bool
+    use HandlesAuthorization;
+    
+    public function viewAny(AuthUser $authUser): bool
     {
-        return $account->user_id === $user->id;
+        return $authUser->can('ViewAny:ExchangeAccount');
     }
 
-    /**
-     * Determine whether the user can update the model.
-     */
-    public function update(User $user, ExchangeAccount $account): bool
+    public function view(AuthUser $authUser, ExchangeAccount $exchangeAccount): bool
     {
-        return $account->user_id === $user->id;
+        return $authUser->can('View:ExchangeAccount');
     }
 
-    /**
-     * Determine whether the user can delete the model.
-     */
-    public function delete(User $user, ExchangeAccount $account): bool
+    public function create(AuthUser $authUser): bool
     {
-        return $account->user_id === $user->id;
+        return $authUser->can('Create:ExchangeAccount');
     }
+
+    public function update(AuthUser $authUser, ExchangeAccount $exchangeAccount): bool
+    {
+        return $authUser->can('Update:ExchangeAccount');
+    }
+
+    public function delete(AuthUser $authUser, ExchangeAccount $exchangeAccount): bool
+    {
+        return $authUser->can('Delete:ExchangeAccount');
+    }
+
+    public function restore(AuthUser $authUser, ExchangeAccount $exchangeAccount): bool
+    {
+        return $authUser->can('Restore:ExchangeAccount');
+    }
+
+    public function forceDelete(AuthUser $authUser, ExchangeAccount $exchangeAccount): bool
+    {
+        return $authUser->can('ForceDelete:ExchangeAccount');
+    }
+
+    public function forceDeleteAny(AuthUser $authUser): bool
+    {
+        return $authUser->can('ForceDeleteAny:ExchangeAccount');
+    }
+
+    public function restoreAny(AuthUser $authUser): bool
+    {
+        return $authUser->can('RestoreAny:ExchangeAccount');
+    }
+
+    public function replicate(AuthUser $authUser, ExchangeAccount $exchangeAccount): bool
+    {
+        return $authUser->can('Replicate:ExchangeAccount');
+    }
+
+    public function reorder(AuthUser $authUser): bool
+    {
+        return $authUser->can('Reorder:ExchangeAccount');
+    }
+
 }
