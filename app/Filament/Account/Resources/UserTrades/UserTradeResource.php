@@ -38,6 +38,11 @@ class UserTradeResource extends Resource
         return '訂單紀錄';
     }
 
+    public static function canCreate(): bool
+    {
+        return false;
+    }
+
     public static function infolist(Schema $schema): Schema
     {
         return UserTradeInfolist::configure($schema);
