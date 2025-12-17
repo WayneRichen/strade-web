@@ -11,7 +11,7 @@ class ExchangeAccount extends Model
 
     protected $fillable = [
         'user_id',
-        'exchange_id',
+        'exchange_uid',
         'name',
         'params',
         'uid',
