@@ -38,6 +38,10 @@ class ExchangeAccountForm
                                 ->autocomplete(false)
                                 ->required(),
 
+                            Hidden::make('exchange_uid')
+                                ->dehydrated() // 儲存時會一起帶進去
+                                ->default(null),
+
                             Hidden::make('last_connected_at')
                                 ->dehydrated() // 儲存時會一起帶進去
                                 ->default(null),
