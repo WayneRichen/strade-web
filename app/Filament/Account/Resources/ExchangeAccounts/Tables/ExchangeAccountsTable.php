@@ -22,6 +22,7 @@ class ExchangeAccountsTable
                     ->searchable(),
                 TextColumn::make('last_connected_at')
                     ->label('最後連線時間')
+                    ->placeholder('N/A')
                     ->sortable(),
                 TextColumn::make('last_status')
                     ->badge()
