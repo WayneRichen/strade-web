@@ -57,6 +57,7 @@ class UserExchangeAccountForm
                                     ->revealable()
                                     ->dehydrated(true)
                                     ->autocomplete(false)
+                                    ->readOnly()
                                     ->live()
                                     ->required();
                             })

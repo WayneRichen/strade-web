@@ -9,6 +9,8 @@ class UserExchangeAccount extends Model
 {
     use LogsActivity;
 
+    protected $table = 'exchange_accounts';
+
     protected $fillable = [
         'user_id',
         'exchange_id',
