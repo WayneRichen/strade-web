@@ -1,12 +1,12 @@
 <?php
 
-namespace App\Filament\Resources\ExchangeAccounts\Tables;
+namespace App\Filament\Resources\UserExchangeAccounts\Tables;
 
 use Filament\Actions\EditAction;
 use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Table;
 
-class ExchangeAccountsTable
+class UserExchangeAccountsTable
 {
     public static function configure(Table $table): Table
     {

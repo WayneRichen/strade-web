@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Filament\Resources\ExchangeAccounts\Schemas;
+namespace App\Filament\Resources\UserExchangeAccounts\Schemas;
 
 use App\Models\Exchange;
 use Filament\Actions\Action;
@@ -15,7 +15,7 @@ use Filament\Schemas\Components\Utilities\Get;
 use Filament\Schemas\Schema;
 use Illuminate\Support\Str;
 
-class ExchangeAccountForm
+class UserExchangeAccountForm
 {
     public static function configure(Schema $schema): Schema
     {

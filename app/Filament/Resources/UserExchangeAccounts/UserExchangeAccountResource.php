@@ -1,20 +1,20 @@
 <?php
 
-namespace App\Filament\Resources\ExchangeAccounts;
+namespace App\Filament\Resources\UserExchangeAccounts;
 
-use App\Filament\Resources\ExchangeAccounts\Pages\ListExchangeAccounts;
-use App\Filament\Resources\ExchangeAccounts\Schemas\ExchangeAccountForm;
-use App\Filament\Resources\ExchangeAccounts\Tables\ExchangeAccountsTable;
-use App\Models\ExchangeAccount;
+use App\Filament\Resources\UserExchangeAccounts\Pages\ListUserExchangeAccounts;
+use App\Filament\Resources\UserExchangeAccounts\Schemas\UserExchangeAccountForm;
+use App\Filament\Resources\UserExchangeAccounts\Tables\UserExchangeAccountsTable;
+use App\Models\UserExchangeAccount;
 use BackedEnum;
 use Filament\Resources\Resource;
 use Filament\Schemas\Schema;
 use Filament\Support\Icons\Heroicon;
 use Filament\Tables\Table;
 
-class ExchangeAccountResource extends Resource
+class UserExchangeAccountResource extends Resource
 {
-    protected static ?string $model = ExchangeAccount::class;
+    protected static ?string $model = UserExchangeAccount::class;
 
     protected static string|BackedEnum|null $navigationIcon = Heroicon::BuildingLibrary;
 
@@ -34,12 +34,12 @@ class ExchangeAccountResource extends Resource
 
     public static function form(Schema $schema): Schema
     {
-        return ExchangeAccountForm::configure($schema);
+        return UserExchangeAccountForm::configure($schema);
     }
 
     public static function table(Table $table): Table
     {
-        return ExchangeAccountsTable::configure($table);
+        return UserExchangeAccountsTable::configure($table);
     }
 
     public static function getRelations(): array
@@ -52,7 +52,7 @@ class ExchangeAccountResource extends Resource
     public static function getPages(): array
     {
         return [
-            'index' => ListExchangeAccounts::route('/'),
+            'index' => ListUserExchangeAccounts::route('/'),
         ];
     }
 }
