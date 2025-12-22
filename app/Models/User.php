@@ -31,11 +31,10 @@ class User extends Authenticatable implements FilamentUser, HasAvatar
         'name',
         'avatar',
         'email',
-        'invited_by',
-        'invite_count',
         'subscription_plan',
         'subscription_ends_at',
         'last_login_at',
+        'banned',
     ];
 
     /**
@@ -80,11 +79,6 @@ class User extends Authenticatable implements FilamentUser, HasAvatar
     public function getFilamentAvatarUrl(): ?string
     {
         return $this->avatar;
-    }
-
-    public function invitedBy()
-    {
-        return $this->belongsTo(User::class, 'invited_by');
     }
 
     public function couponUsages(): HasMany

@@ -34,7 +34,7 @@ class UsersTable
                     ->sortable(),
                 TextColumn::make('subscription_ends_at')
                     ->label('方案到期日')
-                    ->dateTime()
+                    ->placeholder('N/A')
                     ->sortable(),
                 TextColumn::make('last_login_at')
                     ->label('最後登入時間')

@@ -4,6 +4,7 @@ namespace App\Filament\Resources\Users\Schemas;
 
 use Filament\Forms\Components\DateTimePicker;
 use Filament\Forms\Components\Select;
+use Filament\Forms\Components\Toggle;
 use Filament\Infolists\Components\ImageEntry;
 use Filament\Infolists\Components\TextEntry;
 use Filament\Schemas\Schema;
@@ -26,11 +27,11 @@ class UserForm
                         Section::make([
                             ImageEntry::make('avatar')->circular()->hiddenLabel(),
                             TextEntry::make('name')->label('姓名')->copyable(),
+                            TextEntry::make('uid')->label('UID')->copyable(),
                             TextEntry::make('google_id')->label('Google ID')->copyable(),
                             TextEntry::make('email')->label('Gmail')->icon(Heroicon::Envelope)->copyable(),
-                            TextEntry::make('invitedBy.name')->label('推薦人')->icon(Heroicon::User),
-                            TextEntry::make('invite_count')->label('邀請人數')->default(0)->icon(Heroicon::UserPlus),
                             TextEntry::make('last_login_at')->label('最後登入時間'),
+                            Toggle::make('banned')->label('封鎖使用者'),
                             Select::make('subscription_plan')->label('訂閱方案')->default('free')->options([
                                 'free' => 'free',
                                 'premium' => 'premium',

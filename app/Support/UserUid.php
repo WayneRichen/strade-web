@@ -41,6 +41,6 @@ class UserUid
         $this->lastTimestamp = $timestamp;
 
         // 13~16 位數，夠用又好看
-        return ((int) ($timestamp - $this->epoch)) * 1000 + $this->sequence;
+        return ((int) ($timestamp - $this->epoch)) * 10 + $this->sequence;
     }
 }
