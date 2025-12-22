@@ -26,6 +26,7 @@ class ExchangeAccountsTable
                     ->sortable(),
                 TextColumn::make('last_status')
                     ->badge()
+                    ->placeholder('N/A')
                     ->label('連線狀態')
                     ->colors([
                         'success' => 'OK',

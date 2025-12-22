@@ -79,6 +79,7 @@ return new class extends Migration {
 
         Schema::create('exchange_accounts', function (Blueprint $table) {
             $table->id();
+            $table->string('public_id', 20)->unique()->nullable()->comment('對外公開的 ID');
             $table->unsignedBigInteger('user_id')->comment('對應 users.id');
             $table->unsignedInteger('exchange_id')->comment('對應 exchanges.id');
             $table->string('name', 100)->nullable()->comment('使用者自訂名稱');
@@ -93,6 +94,7 @@ return new class extends Migration {
 
         Schema::create('bots', function (Blueprint $table) {
             $table->id();
+            $table->string('public_id', 20)->unique()->nullable()->comment('對外公開的 ID');
             $table->unsignedBigInteger('user_id')->comment('對應 users.id');
             $table->unsignedInteger('exchange_account_id')->comment('對應 exchange_accounts.id');
             $table->unsignedInteger('strategy_id')->comment('對應 strategies.id');

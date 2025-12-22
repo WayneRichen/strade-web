@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use App\Models\Concerns\LogsActivity;
+use App\Support\NumberId;
 use Illuminate\Database\Eloquent\Model;
 
 class ExchangeAccount extends Model
@@ -11,6 +12,7 @@ class ExchangeAccount extends Model
 
     protected $fillable = [
         'user_id',
+        'public_id',
         'exchange_id',
         'name',
         'params',
@@ -23,6 +25,28 @@ class ExchangeAccount extends Model
     protected $casts = [
         'params' => 'array',
     ];
+
+    public function getRouteKeyName(): string
+    {
+        return 'public_id';
+    }
+
+    protected static function booted()
+    {
+        static::created(function (self $model) {
+            if ($model->public_id) {
+                return;
+            }
+
+            do {
+                $model->public_id = NumberId::generateNumberId((string) $model->user_id);
+            } while (
+                self::query()->where('public_id', $model->public_id)->exists()
+            );
+
+            $model->saveQuietly();
+        });
+    }
 
     public function exchange()
     {
