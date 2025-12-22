@@ -28,6 +28,10 @@ class GoogleController extends Controller
             ]
         );
 
+        if ($user->banned) {
+            abort(403);
+        }
+
         Auth::login($user, remember: true);
 
         return redirect()->route('filament.account.pages.dashboard');

@@ -103,4 +103,14 @@ class User extends Authenticatable implements FilamentUser, HasAvatar
                     ->orWhere('expired_at', '>', now());
             });
     }
+
+    public function exchangeAccounts(): HasMany
+    {
+        return $this->hasMany(ExchangeAccount::class);
+    }
+
+    public function bots(): HasMany
+    {
+        return $this->hasMany(Bot::class);
+    }
 }
