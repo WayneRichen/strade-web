@@ -39,7 +39,7 @@ class StrategyTrade extends Model
         'entry_at' => 'datetime',
         'exit_at' => 'datetime',
         'pnl_pct' => 'decimal:4',
-        'extra' => 'array', // json -> array
+        'extra' => 'string',
         'created_at' => 'datetime',
         'updated_at' => 'datetime',
     ];

@@ -2,12 +2,14 @@
 
 namespace App\Filament\Resources\StrategyTrades\Tables;
 
+use Filament\Actions\Action;
 use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Table;
 use Filament\Tables\Filters\SelectFilter;
 use Filament\Tables\Filters\Filter;
 use Filament\Forms\Components\DatePicker;
 use Illuminate\Database\Eloquent\Builder;
+use Illuminate\Support\HtmlString;
 
 class StrategyTradesTable
 {
@@ -48,6 +50,10 @@ class StrategyTradesTable
                     ->label('盈虧（%）')
                     ->formatStateUsing(fn($state) => number_format($state, 2) . '%')
                     ->color(fn($record) => $record->pnl_pct >= 0 ? 'success' : 'danger'),
+                TextColumn::make('extra')
+                    ->label('備註')
+                    ->tooltip(fn($record) => $record->extra)
+                    ->limit(20),
             ])
             ->defaultSort('created_at', 'desc')
             ->filters([
@@ -96,6 +102,29 @@ class StrategyTradesTable
                     }),
             ], \Filament\Tables\Enums\FiltersLayout::AboveContent)
             ->recordActions([
+                Action::make('viewRaw')
+                    ->label('查看備註')
+                    ->icon('heroicon-o-eye')
+                    ->color('gray')
+                    ->outlined()
+                    ->visible(fn($record) => filled($record->extra))
+                    ->modalHeading('備註')
+                    ->modalSubmitAction(false) // 只讀，不需要送出按鈕
+                    ->modalCancelActionLabel('關閉')
+                    ->modalContent(function ($record) {
+                        $raw = $record->extra;
+
+                        $decoded = json_decode($raw, true);
+                        if (json_last_error() === JSON_ERROR_NONE) {
+                            $raw = json_encode($decoded, JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES);
+                        }
+
+                        return new HtmlString(
+                            '<pre class="text-xs whitespace-pre-wrap font-mono">' .
+                                e($raw) .
+                                '</pre>'
+                        );
+                    }),
             ])
             ->toolbarActions([
             ])
